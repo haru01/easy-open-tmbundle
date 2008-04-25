@@ -2,9 +2,10 @@ TextMate Bundle
 Easy Open support 
 
 == feature list
-* open ruby class, module, def
-* open gem 
+* open ruby class, module, def in project
 * open recent file in project
+* open gem 
+
 
 == Installation
  
