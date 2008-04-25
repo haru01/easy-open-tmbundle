@@ -1,0 +1,8 @@
+This Project is TextMate Bundle
+Easy Open support 
+
+== feature list
+* open ruby class, module, def
+* open gem 
+* open recent file in project
+
