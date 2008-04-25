@@ -13,7 +13,7 @@ module EasyOpen
       end
       
       def run
-        if ENV["TM_PROJECT_DIRECTORY"].nil?
+        if @project_dir.nil?
           puts "TM_PROJECT_DIRECTORY is nil. not create tag"
           exit
         end
