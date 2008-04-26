@@ -8,7 +8,6 @@ module EasyOpen
     describe "メソッドなどの位置情報のデータ構造について" do
       before(:all) do
         @visitor = FileVisitor.new
-        @yaml = nil
         file_name = File.expand_path(File.dirname(__FILE__)) + '/../../fixtures/ruby_code.rb'
           # test target method
         File.open(file_name){ |file| @visitor.visit(file) }
