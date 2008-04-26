@@ -1,4 +1,3 @@
-require "yaml"
 require 'fileutils'
 
 module EasyOpen
@@ -9,8 +8,8 @@ module EasyOpen
           save_dir = "#{ENV["HOME"]}/.easyopen_tmbundle#{ENV["TM_PROJECT_DIRECTORY"]}")
         @project_dir = project_dir
         @save_dir = save_dir
-        @tag_yaml = "#{@save_dir}/tag.yaml"
-        @call_stack_yaml = "#{@save_dir}/call_stack.yaml"
+        @tag_dump = "#{@save_dir}/tag.dump"
+        @call_stack_dump = "#{@save_dir}/call_stack.dump"
       end
       
       def run
@@ -18,26 +17,28 @@ module EasyOpen
           puts "TM_PROJECT_DIRECTORY is nil. not create tag"
           exit
         end
-
-        converter = YamlConverter.new
+        
+        visitor = FileVisitor.new
         Dir.glob("#{@project_dir}/**/*.rb").each do |file_name|
           File.open(file_name) do |file|
-            converter.parse(file)
+            visitor.visit(file)
           end
         end
         FileUtils::mkdir_p("#{@save_dir}")
-        File.open("#{@tag_yaml}", "w") do |file|
-          file.puts converter.to_yaml
-        end
         
-        File.open("#{@call_stack_yaml}", "w") do |file|
-          file.puts YAML.dump([])
-        end
-        puts "created create_tag_file=>#{@tag_yaml}"
+        open("#{@tag_dump}", "w") { |mio|
+          Marshal.dump(visitor.create_def_location_data, mio)
+        }
+        
+        open("#{@call_stack_dump}", "w") { |mio|
+          Marshal.dump([], mio)
+        }
+        
+        puts "created. save_dir=>#{@save_dir}"
       end
     end
     
-    class YamlConverter
+    class FileVisitor
       def initialize
         @locations = []
         @files = []
@@ -46,7 +47,7 @@ module EasyOpen
         @regular = /(^\s*(class|def|module)\s*)(\w*).*$/
       end
       
-      def parse(opened_file)
+      def visit(opened_file)
         file = File.expand_path(opened_file.path)
         opened_file.each_with_index do |line, index|
           if m = @regular.match(line)
@@ -55,7 +56,7 @@ module EasyOpen
             @name_locationids[name] ||= []
             @name_locationids[name] << @locations.size 
             @locations << 
-              {  
+              {
                 :file_id => @files.index(file),
                 :line => index + 1,
                 :column =>  m[1].size + 1,
@@ -64,13 +65,12 @@ module EasyOpen
         end
       end
       
-      def to_yaml
-        YAML.dump(
-            {
-              :name_locationids => @name_locationids, 
-              :files => @files, 
-              :locations => @locations
-            })
+      def create_def_location_data
+        {
+          :name_locationids => @name_locationids, 
+          :files => @files, 
+          :locations => @locations
+        }
       end
     end
   end

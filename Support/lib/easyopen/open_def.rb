@@ -1,5 +1,4 @@
 require File.dirname(__FILE__) + '/ui'
-require "yaml"
 
 module EasyOpen
   class OpenDefByWord
@@ -14,39 +13,51 @@ module EasyOpen
 
       @current_word = current_word
       @project_dir = project_dir
-      @call_stack_yaml = "#{save_dir}/call_stack.yaml"
-      @tag_yaml = "#{save_dir}/tag.yaml"
+      @call_stack_dump = "#{save_dir}/call_stack.dump"
+      @tag_dump = "#{save_dir}/tag.dump"
       @current = current
     end
     
-    def open
-      if open_menu(convert_yaml_to_menu_infos)
+    def run
+      if open_menu(convert_dump_to_menu_infos)
         push_call_stack
       end
     end
     
     def push_call_stack
-      if File.exist?(@call_stack_yaml)
-        call_stack = YAML.load_file("#{@call_stack_yaml}")
-      end
-      call_stack ||= []
+      call_stack = nil
+      
+      open("#{@call_stack_dump}", "r") { |io|
+        call_stack = Marshal.load(io)        
+      }
+      
       call_stack.push @current
-      File.open("#{@call_stack_yaml}", "w") do |file|
-        file.puts YAML.dump(call_stack)
-      end
+      
+      open("#{@call_stack_dump}", "w") { |mio|
+        Marshal.dump(call_stack, mio)
+      }      
+    end
+    
+    def convert_dump_to_menu_infos
+      to_menu_infos load_tag
     end
 
-    def convert_yaml_to_menu_infos
-      tag = nil
+    def load_tag
       begin
-        tag = YAML.load_file("#{@tag_yaml}")
+        tag = nil
+        open("#{@tag_dump}", "r") { |io|
+          tag = Marshal.load(io)
+        }
+        return tag
       rescue
         puts "not found tag file. please create_tag_file before open_def"
         exit
       end
+    end
+
+    def to_menu_infos tag
       locationids = tag[:name_locationids][@current_word]
       return [] unless locationids
-      
       result = locationids.map do |id|
         file_id = tag[:locations][id][:file_id]
         file = tag[:files][file_id]

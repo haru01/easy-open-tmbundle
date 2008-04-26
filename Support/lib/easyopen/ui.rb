@@ -11,7 +11,6 @@ module EasyOpen
       
       if infos.size == 1
         TextMate.go_to(infos[0]) 
-        puts "open"
         return infos[0]
       end
       
@@ -19,7 +18,6 @@ module EasyOpen
       selected  = TextMate::UI.menu(displays)
       return unless selected
       TextMate.go_to(infos[selected])
-      puts "open"
       return infos[selected]
     end
   end

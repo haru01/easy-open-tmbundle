@@ -1,14 +1,13 @@
 require File.dirname(__FILE__) + '/ui'
-require "yaml"
 
 module EasyOpen
   class OpenCallStack
     include EasyOpen::UI
-    def initialize(call_stack_yaml = "#{ENV["HOME"]}/.easyopen_tmbundle#{ENV["TM_PROJECT_DIRECTORY"]}/call_stack.yaml")
-      @call_stack_yaml = call_stack_yaml
+    def initialize(call_stack_dump = "#{ENV["HOME"]}/.easyopen_tmbundle#{ENV["TM_PROJECT_DIRECTORY"]}/call_stack.dump")
+      @call_stack_dump = call_stack_dump
     end
     
-    def open
+    def run
       node = pop_call_stack
       if node
         open_menu([node])
@@ -18,11 +17,17 @@ module EasyOpen
     end
     
     def pop_call_stack
-      call_stack = YAML.load_file("#{@call_stack_yaml}") || []
+      
+      call_stack = nil
+      open("#{@call_stack_dump}", "r") { |io|
+        call_stack = Marshal.load(io)
+      }
+      
       node = call_stack.pop
-      File.open("#{@call_stack_yaml}", "w") do |file|
-        file.puts YAML.dump(call_stack)
-      end
+      
+      open("#{@call_stack_dump}", "w") { |mio|
+        Marshal.dump(call_stack, mio)
+      }
       return node
     end
   end
