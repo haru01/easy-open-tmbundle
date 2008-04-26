@@ -6,10 +6,11 @@ module EasyOpen
     class Generator
       def initialize(
           project_dir = ENV["TM_PROJECT_DIRECTORY"],
-          tag_save_dir = "#{ENV["HOME"]}/.easyopen_tmbundle#{ENV["TM_PROJECT_DIRECTORY"]}")
+          save_dir = "#{ENV["HOME"]}/.easyopen_tmbundle#{ENV["TM_PROJECT_DIRECTORY"]}")
         @project_dir = project_dir
-        @tag_save_dir = tag_save_dir
-        @tag_yaml = "#{@tag_save_dir}/tag.yaml"
+        @save_dir = save_dir
+        @tag_yaml = "#{@save_dir}/tag.yaml"
+        @call_stack_yaml = "#{@save_dir}/call_stack.yaml"
       end
       
       def run
@@ -24,12 +25,15 @@ module EasyOpen
             converter.parse(file)
           end
         end
-        FileUtils::mkdir_p("#{@tag_save_dir}")
+        FileUtils::mkdir_p("#{@save_dir}")
         File.open("#{@tag_yaml}", "w") do |file|
           file.puts converter.to_yaml
         end
-        puts "created create_tag_file"
-        puts "  filepath=>#{@tag_yaml}"
+        
+        File.open("#{@call_stack_yaml}", "w") do |file|
+          file.puts YAML.dump([])
+        end
+        puts "created create_tag_file=>#{@tag_yaml}"
       end
     end
     
