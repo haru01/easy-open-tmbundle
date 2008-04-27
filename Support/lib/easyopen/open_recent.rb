@@ -11,7 +11,7 @@ module EasyOpen
       @current_file = current_file
     end
 
-    def open
+    def run
       open_menu(menu_infos)
     end
 
