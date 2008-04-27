@@ -35,20 +35,20 @@ module EasyOpen
       
       open("#{@call_stack_dump}", "w") { |mio|
         Marshal.dump(call_stack, mio)
-      }      
+      }
     end
     
     def convert_dump_to_menu_infos
-      to_menu_infos load_tag
+      to_menu_infos load_location_data
     end
 
-    def load_tag
+    def load_location_data
       begin
-        tag = nil
+        def_location_data = nil
         open("#{@tag_dump}", "r") { |io|
-          tag = Marshal.load(io)
+          def_location_data = Marshal.load(io)
         }
-        return tag
+        return def_location_data
       rescue
         puts "not found tag file. please create_tag_file before open_def"
         exit
@@ -69,6 +69,6 @@ module EasyOpen
         }
       end
       result
-    end    
+    end
   end
 end
