@@ -6,13 +6,10 @@
 	<string>EasyOpen</string>
 	<key>ordering</key>
 	<array>
+		<string>301C8785-9A97-4E24-A313-2AC89FF7403F</string>
 		<string>3CDBE47A-F55B-44A4-9C9B-19E72012292C</string>
 		<string>1E135F00-FE33-4BDE-AA2C-31A6C3B3943D</string>
 		<string>5C05808F-1680-4237-9026-A2EFD0CD263F</string>
-		<string>649B6451-0B00-4308-8E92-172F1BD02876</string>
-		<string>64519697-3106-4074-988C-3F13B36CEC94</string>
-		<string>B2E8F210-6300-41B2-BB61-ED08309EE4CF</string>
-		<string>301C8785-9A97-4E24-A313-2AC89FF7403F</string>
 		<string>B5701FBA-C60D-4216-B5E5-D22829649FB2</string>
 	</array>
 	<key>uuid</key>
