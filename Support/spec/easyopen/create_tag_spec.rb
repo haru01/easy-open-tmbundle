@@ -1,6 +1,6 @@
 require "pp"
 
-require File.dirname(__FILE__) + "/../../lib/easyopen/create_tag"
+require File.dirname(__FILE__) + "/../../lib/easyopen/create_def_location_data"
 
 module EasyOpen
   module Tag
