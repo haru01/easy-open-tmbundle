@@ -34,7 +34,8 @@ module EasyOpen
           Marshal.dump([], mio)
         }
         
-        puts "created. save_dir=>#{@save_dir}"
+        puts "location_file is created, and call stack file is cleaned."
+        puts "save_dir=>#{@save_dir}"
       end
     end
     

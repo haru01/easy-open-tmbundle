@@ -65,7 +65,7 @@ module EasyOpen
           :file => file,
           :line => def_location_data[:locations][id][:line],
           :column  => def_location_data[:locations][id][:column],
-          :display => "#{file.gsub("#{@project_dir}/", '')}"
+          :display => "#{file.gsub("#{@project_dir}/", '')}:#{def_location_data[:locations][id][:line]}"
         }
       end
       result
