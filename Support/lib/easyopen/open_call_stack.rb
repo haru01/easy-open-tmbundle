@@ -10,7 +10,7 @@ module EasyOpen
     def run
       node = pop_call_stack
       if node
-        open_menu([node])
+        open_menu(node)
       else
         puts "stack is empty"
       end

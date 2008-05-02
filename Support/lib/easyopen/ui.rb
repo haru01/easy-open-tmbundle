@@ -4,8 +4,9 @@ require "#{ENV['TM_SUPPORT_PATH']}/lib/textmate"
 module EasyOpen
   module UI
     def open_menu(infos)
+      infos = [infos].flatten
       if infos.size == 0
-        puts "not found path"
+        puts "not found"
         return
       end
       
