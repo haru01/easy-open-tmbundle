@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/ui'
 
 module EasyOpen
-  class OpenByRecent
+  class OpenRecent
     include EasyOpen::UI
     def initialize(home = ENV["HOME"], 
         project_dir = ENV["TM_PROJECT_DIRECTORY"],

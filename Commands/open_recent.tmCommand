@@ -7,7 +7,7 @@
 	<key>command</key>
 	<string>#!/usr/bin/env ruby
 require ENV['TM_BUNDLE_SUPPORT'] + "/lib/easyopen/open_recent"
-EasyOpen::OpenByRecent.new.run
+EasyOpen::OpenRecent.new.run
 </string>
 	<key>input</key>
 	<string>none</string>
