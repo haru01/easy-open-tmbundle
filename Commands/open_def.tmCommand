@@ -7,7 +7,7 @@
 	<key>command</key>
 	<string>#!/usr/bin/env ruby
 require ENV['TM_BUNDLE_SUPPORT'] + "/lib/easyopen/open_def"
-EasyOpen::OpenDefByWord.new.run</string>
+EasyOpen::OpenDef.new.run</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
