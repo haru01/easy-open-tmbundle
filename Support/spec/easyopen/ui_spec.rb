@@ -9,7 +9,7 @@ module EasyOpen::UI
     before(:each) do
       @target = TestTarget.new
     end
-
+    
     describe "when args size is zero" do
       
       it "should show 'not found message'" do
