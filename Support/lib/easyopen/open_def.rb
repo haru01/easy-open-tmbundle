@@ -4,7 +4,8 @@ require File.dirname(__FILE__) + '/config'
 module EasyOpen
   class OpenDef
     include EasyOpen::UI
-    def initialize(config ={} )
+    
+    def initialize(config = {})
       Config.setup(config)
     end
     
