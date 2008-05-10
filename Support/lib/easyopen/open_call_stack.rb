@@ -1,10 +1,11 @@
 require File.dirname(__FILE__) + '/ui'
+require File.dirname(__FILE__) + '/config'
 
 module EasyOpen
   class OpenCallStack
     include EasyOpen::UI
-    def initialize(call_stack_dump = "#{ENV["HOME"]}/.easyopen_tmbundle#{ENV["TM_PROJECT_DIRECTORY"]}/call_stack.dump")
-      @call_stack_dump = call_stack_dump
+    def initialize(config = {})
+      Config.setup(config)
     end
     
     def run
@@ -19,13 +20,13 @@ module EasyOpen
     def pop_call_stack
       
       call_stack = nil
-      open("#{@call_stack_dump}", "r") { |io|
+      open("#{Config[:call_stack_dump]}", "r") { |io|
         call_stack = Marshal.load(io)
       }
       
       node = call_stack.pop
       
-      open("#{@call_stack_dump}", "w") { |mio|
+      open("#{Config[:call_stack_dump]}", "w") { |mio|
         Marshal.dump(call_stack, mio)
       }
       return node
