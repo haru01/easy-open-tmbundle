@@ -1,13 +1,14 @@
 require File.dirname(__FILE__) + '/ui'
+require File.dirname(__FILE__) + '/config'
+
 
 module EasyOpen
   class OpenRecent
     include EasyOpen::UI
-    def initialize(
-        project_dir = ENV["TM_PROJECT_DIRECTORY"],
-        current_file = ENV["TM_FILEPATH"] )
-      @project_dir = project_dir
-      @current_file = current_file
+    
+    def initialize
+      @project_dir = Config[:project_dir]
+      @current_file = Config[:current_file]
     end
 
     def run
@@ -19,9 +20,7 @@ module EasyOpen
     end
 
     def menu_infos
-      root = @project_dir
-
-      Dir.glob("#{ root }/**/*.*").
+      Dir.glob("#{@project_dir}/**/*.*").
         sort_by { |f| File.mtime(f) }.
         reverse[0..10].
         reject { |e| e == @current_file }.
@@ -29,7 +28,7 @@ module EasyOpen
           dir_base = File.split(e) 
           { 
             :file => e, 
-            :display => "#{e.sub(root, "").sub("/", "")}"
+            :display => "#{e.sub(@project_dir, "").sub("/", "")}"
           }
         } 
     end
