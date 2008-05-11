@@ -10,7 +10,7 @@ module EasyOpen::UI
       @target = TestTarget.new
     end
     
-    describe "when args size is zero" do
+    describe "when infos size is zero" do
       
       it "should show 'not found message'" do
         @target.should_receive(:puts).with("not found")
@@ -18,7 +18,7 @@ module EasyOpen::UI
       end
     end
     
-    describe "when args size is one" do
+    describe "when infos size is one" do
       before(:each) do
         @dummy = {
           :file => "dummy_file",
@@ -34,7 +34,7 @@ module EasyOpen::UI
       end
     end
     
-    describe "when args size is not zero and one" do
+    describe "when infos size is not(zero and one)" do
       before(:each) do
         @dummy1 = {  
           :file => "dummy_file1",
