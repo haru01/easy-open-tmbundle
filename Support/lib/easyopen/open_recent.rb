@@ -16,21 +16,20 @@ module EasyOpen
         puts "project_dir is nil. please open project"
         return
       end
-      open_menu(menu_infos)
+      open_menu(recent_infos)
     end
 
-    def menu_infos
+    def recent_infos
       Dir.glob("#{@project_dir}/**/*.*").
         sort_by { |f| File.mtime(f) }.
         reverse[0..10].
         reject { |e| e == @current_file }.
-        collect{ |e| 
-          dir_base = File.split(e) 
+        map { |e| 
           { 
             :file => e, 
             :display => "#{e.sub(@project_dir, "").sub("/", "")}"
           }
-        } 
+        }
     end
   end
 end
