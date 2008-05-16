@@ -11,8 +11,7 @@ module EasyOpen::UI
     end
     
     describe "when infos size is zero" do
-      
-      it "should show 'not found message'" do
+      it "should show 'not found' message" do
         @target.should_receive(:puts).with("not found")
         @target.open_menu([]).should be_nil
       end
@@ -26,11 +25,12 @@ module EasyOpen::UI
           :column  => "dummy_column",
           :display => "dummy_display"
         }
+        @infos = [@dummy]
       end
       
-      it "should open file,  when args size is one" do
+      it "should open file" do
         TextMate.should_receive(:go_to).with(@dummy)
-        @target.open_menu([@dummy]).should == @dummy
+        @target.open_menu(@infos).should == @dummy
       end
     end
     
@@ -48,12 +48,13 @@ module EasyOpen::UI
           :column  => "dummy_column2",
           :display => "dummy_display2"
         }
+        @infos = [@dummy1, @dummy2]
       end
       
       it "should open menu-> open file" do
         TextMate::UI.should_receive(:menu).with(["dummy_display1", "dummy_display2"]).and_return(1)
         TextMate.should_receive(:go_to).with(@dummy2)
-        @target.open_menu([@dummy1, @dummy2]).should == @dummy2
+        @target.open_menu(@infos).should == @dummy2
       end
     end
   end

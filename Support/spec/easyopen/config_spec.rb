@@ -10,7 +10,6 @@ module EasyOpen
       Config.defaults[:call_stack_dump].should == "#{ENV["HOME"]}/.easyopen_tmbundle#{ENV["TM_PROJECT_DIRECTORY"]}/call_stack.dump"
       Config.defaults[:current_location].should == {:file => ENV["TM_FILEPATH"], :line => ENV["TM_LINE_NUMBER"], :column => ENV["TM_COLUMN_NUMBER"]}
       Config.defaults[:current_file].should == ENV['TM_FILEPATH']
-      
     end
     
     it "should return config value" do
