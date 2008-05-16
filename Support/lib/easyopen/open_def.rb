@@ -26,7 +26,7 @@ module EasyOpen
     def convert_menu_infos def_location_data
       locationids = def_location_data[:name_locationids][Config[:current_word]]
       return [] unless locationids
-      result = locationids.map do |id|
+      menu_infos = locationids.map do |id|
         file_id = def_location_data[:locations][id][:file_id]
         file = def_location_data[:files][file_id]
         {  
@@ -36,7 +36,7 @@ module EasyOpen
           :display => "#{file.gsub("#{Config[:project_dir]}/", '')}:#{def_location_data[:locations][id][:line]}"
         }
       end
-      result
+      menu_infos
     end
   end
 end
