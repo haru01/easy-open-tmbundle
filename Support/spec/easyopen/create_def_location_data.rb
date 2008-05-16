@@ -9,7 +9,7 @@ module EasyOpen
       @file_name = File.expand_path(File.dirname(__FILE__)) + '/../../fixtures/ruby_code.rb'
         # test target method
       @parser.parse(@file_name)
-      @result = @parser.create_def_location_data
+      @result = @parser.def_data
     end
     
     it "ハッシュ:filesにファイルの位置情報が含まれていること" do

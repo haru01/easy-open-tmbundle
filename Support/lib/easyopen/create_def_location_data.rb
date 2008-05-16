@@ -1,5 +1,6 @@
 require 'fileutils'
 require File.dirname(__FILE__) + '/config'
+require File.dirname(__FILE__) + '/repository'
 
 module EasyOpen
   class CreateDefLocationData
@@ -12,21 +13,13 @@ module EasyOpen
         puts "TM_PROJECT_DIRECTORY is nil. can't create def_location_data"
         exit
       end
-      
       parser = Parser.new
       Dir.glob("#{Config[:project_dir]}/**/*.rb").each do |file_name|
         parser.parse(file_name)
       end
       FileUtils::mkdir_p("#{Config[:save_dir]}")
-      
-      open("#{Config[:def_location_dump]}", "w") { |mio|
-        Marshal.dump(parser.create_def_location_data, mio)
-      }
-      
-      open("#{Config[:call_stack_dump]}", "w") { |mio|
-        Marshal.dump([], mio)
-      }
-      
+      DefDataRepository.save parser.def_data      
+      CallStackRepository.init
       puts "location_file is created, and call stack file is cleaned."
       puts "save_dir=>#{Config[:save_dir]}"
     end
@@ -60,7 +53,7 @@ module EasyOpen
       end
     end
     
-    def create_def_location_data
+    def def_data
       {
         :name_locationids => @name_locationids, 
         :files => @files, 

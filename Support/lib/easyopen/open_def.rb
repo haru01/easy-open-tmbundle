@@ -1,5 +1,6 @@
 require File.dirname(__FILE__) + '/ui'
 require File.dirname(__FILE__) + '/config'
+require File.dirname(__FILE__) + '/repository'
 
 module EasyOpen
   class OpenDef
@@ -10,44 +11,19 @@ module EasyOpen
     end
     
     def run
-      if open_menu(convert_dump_to_menu_infos)
+      if open_menu(convert_menu_infos(DefDataRepository.load))
         push_call_stack
       end
     end
     
     def push_call_stack
-      call_stack = nil
-      
-      open("#{Config[:call_stack_dump]}", "r") { |io|
-        call_stack = Marshal.load(io)        
-      }
-      
+      call_stack = nil      
+      call_stack = CallStackRepository.load
       call_stack.push Config[:current_location]
-      
-      open("#{Config[:call_stack_dump]}", "w") { |mio|
-        Marshal.dump(call_stack, mio)
-      }
+      CallStackRepository.save call_stack
     end
     
-    
-    def convert_dump_to_menu_infos
-      to_menu_infos load_location_data
-    end
-
-    def load_location_data
-      begin
-        def_location_data = nil
-        open("#{Config[:def_location_dump]}", "r") { |io|
-          def_location_data = Marshal.load(io)
-        }
-        return def_location_data
-      rescue
-        puts "not found def_location_data file. please create_def_location_data_file before open_def"
-        exit
-      end
-    end
-
-    def to_menu_infos def_location_data
+    def convert_menu_infos def_location_data
       locationids = def_location_data[:name_locationids][Config[:current_word]]
       return [] unless locationids
       result = locationids.map do |id|
