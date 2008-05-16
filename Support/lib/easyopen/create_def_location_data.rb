@@ -9,7 +9,7 @@ module EasyOpen
     
     def run
       if Config[:project_dir].nil?
-        puts "TM_PROJECT_DIRECTORY is nil. not create def_location_data"
+        puts "TM_PROJECT_DIRECTORY is nil. can't create def_location_data"
         exit
       end
       
