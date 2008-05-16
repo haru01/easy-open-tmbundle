@@ -29,6 +29,7 @@ module EasyOpen
       }
     end
     
+    
     def convert_dump_to_menu_infos
       to_menu_infos load_location_data
     end

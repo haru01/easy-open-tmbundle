@@ -13,16 +13,14 @@ module EasyOpen
         exit
       end
       
-      visitor = FileVisitor.new
+      parser = Parser.new
       Dir.glob("#{Config[:project_dir]}/**/*.rb").each do |file_name|
-        File.open(file_name) do |file|
-          visitor.visit(file)
-        end
+        parser.parse(file_name)
       end
       FileUtils::mkdir_p("#{Config[:save_dir]}")
       
       open("#{Config[:def_location_dump]}", "w") { |mio|
-        Marshal.dump(visitor.create_def_location_data, mio)
+        Marshal.dump(parser.create_def_location_data, mio)
       }
       
       open("#{Config[:call_stack_dump]}", "w") { |mio|
@@ -34,7 +32,7 @@ module EasyOpen
     end
   end
   
-  class FileVisitor
+  class Parser
     def initialize
       @locations = []
       @files = []
@@ -43,20 +41,21 @@ module EasyOpen
       @regular = /(^\s*(class|def|module)\s*)(\w*).*$/
     end
     
-    def visit(opened_file)
-      file = File.expand_path(opened_file.path)
-      opened_file.each_with_index do |line, index|
-        if m = @regular.match(line)
-          name = m[3].to_s
-          @files << file unless @files.include?(file)
-          @name_locationids[name] ||= []
-          @name_locationids[name] << @locations.size 
-          @locations << 
-            {
-              :file_id => @files.index(file),
-              :line => index + 1,
-              :column =>  m[1].size + 1,
-            }
+    def parse(file_name)
+      File.open(file_name) do |file|
+        file.each_with_index do |line, index|
+          if m = @regular.match(line)
+            name = m[3].to_s
+            @files << file_name unless @files.include?(file_name)
+            @name_locationids[name] ||= []
+            @name_locationids[name] << @locations.size 
+            @locations << 
+              {
+                :file_id => @files.index(file_name),
+                :line => index + 1,
+                :column =>  m[1].size + 1,
+              }
+          end
         end
       end
     end

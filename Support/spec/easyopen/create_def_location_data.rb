@@ -5,15 +5,15 @@ require File.dirname(__FILE__) + "/../../lib/easyopen/create_def_location_data"
 module EasyOpen
   describe "メソッドなどの位置情報のデータ構造について" do
     before(:all) do
-      @visitor = FileVisitor.new
-      file_name = File.expand_path(File.dirname(__FILE__)) + '/../../fixtures/ruby_code.rb'
+      @parser = Parser.new
+      @file_name = File.expand_path(File.dirname(__FILE__)) + '/../../fixtures/ruby_code.rb'
         # test target method
-      File.open(file_name){ |file| @visitor.visit(file) }
-      @result = @visitor.create_def_location_data
+      @parser.parse(@file_name)
+      @result = @parser.create_def_location_data
     end
     
     it "ハッシュ:filesにファイルの位置情報が含まれていること" do
-      @result[:files].should include("/Users/ienagaeiji/Library/Application Support/TextMate/Bundles/EasyOpen.tmbundle/Support/fixtures/ruby_code.rb")
+      @result[:files].should include(@file_name)
     end
     
     it "ハッシュ：locationsに複数のロケーション情報が含まれていること" do
