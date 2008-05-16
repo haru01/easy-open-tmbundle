@@ -11,7 +11,7 @@ module EasyOpen
     end
     
     def run
-      if open_menu(convert_menu_infos(DefDataRepository.load))
+      if open_menu(menu_infos)
         push_call_stack
       end
     end
@@ -23,17 +23,18 @@ module EasyOpen
       CallStackRepository.save call_stack
     end
     
-    def convert_menu_infos def_location_data
-      locationids = def_location_data[:name_locationids][Config[:current_word]]
+    def menu_infos
+      def_data = DefDataRepository.load
+      locationids = def_data[:name_locationids][Config[:current_word]]
       return [] unless locationids
       menu_infos = locationids.map do |id|
-        file_id = def_location_data[:locations][id][:file_id]
-        file = def_location_data[:files][file_id]
+        file_id = def_data[:locations][id][:file_id]
+        file = def_data[:files][file_id]
         {  
           :file => file,
-          :line => def_location_data[:locations][id][:line],
-          :column  => def_location_data[:locations][id][:column],
-          :display => "#{file.gsub("#{Config[:project_dir]}/", '')}:#{def_location_data[:locations][id][:line]}"
+          :line => def_data[:locations][id][:line],
+          :column  => def_data[:locations][id][:column],
+          :display => "#{file.gsub("#{Config[:project_dir]}/", '')}:#{def_data[:locations][id][:line]}"
         }
       end
       menu_infos
