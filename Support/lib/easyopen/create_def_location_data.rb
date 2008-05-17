@@ -31,7 +31,7 @@ module EasyOpen
       @files = []
       @name_locationids = {}
       #TODO molude Hoge::Fugaに対応すること
-      @regular = /(^\s*(class|def|module)\s*)(\w*).*$/
+      @regular = /(^\s*(class|def|module)\s*)(\w*)(.*)$/
     end
     
     def parse(file_name)
@@ -39,6 +39,8 @@ module EasyOpen
         file.each_with_index do |line, index|
           if m = @regular.match(line)
             name = m[3].to_s
+            args = m[4].to_s if m[2].to_s == "def"
+            puts args
             @files << file_name unless @files.include?(file_name)
             @name_locationids[name] ||= []
             @name_locationids[name] << @locations.size 
@@ -47,6 +49,7 @@ module EasyOpen
                 :file_id => @files.index(file_name),
                 :line => index + 1,
                 :column =>  m[1].size + 1,
+                :args => args
               }
           end
         end

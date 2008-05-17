@@ -30,11 +30,14 @@ module EasyOpen
       menu_infos = locationids.map do |id|
         file_id = def_data[:locations][id][:file_id]
         file = def_data[:files][file_id]
+        display = "#{file.gsub("#{Config[:project_dir]}/", '')}"+ 
+                  ":#{def_data[:locations][id][:line]}" +
+                  ":#{def_data[:locations][id][:args]}"
         {  
           :file => file,
           :line => def_data[:locations][id][:line],
           :column  => def_data[:locations][id][:column],
-          :display => "#{file.gsub("#{Config[:project_dir]}/", '')}:#{def_data[:locations][id][:line]}"
+          :display => display
         }
       end
       menu_infos
