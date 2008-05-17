@@ -9,7 +9,7 @@ module EasyOpen
         }
       end
       
-      def save call_stack
+      def save(call_stack)
         open("#{Config[:call_stack_dump]}", "w") { |mio|
           Marshal.dump(call_stack, mio)
         }
@@ -25,7 +25,7 @@ module EasyOpen
   
   class DefDataRepository
     class << self
-      def save def_data
+      def save(def_data)
         open("#{Config[:def_location_dump]}", "w") { |mio|
           Marshal.dump(def_data, mio)
         }
