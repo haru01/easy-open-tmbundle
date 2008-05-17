@@ -40,7 +40,6 @@ module EasyOpen
           if m = @regular.match(line)
             name = m[3].to_s
             args = m[4].to_s if m[2].to_s == "def"
-            puts args
             @files << file_name unless @files.include?(file_name)
             @name_locationids[name] ||= []
             @name_locationids[name] << @locations.size 
