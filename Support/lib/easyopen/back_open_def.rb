@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/config'
 require File.dirname(__FILE__) + '/repository'
 
 module EasyOpen
-  class OpenCallStack
+  class BackOpenDef
     include EasyOpen::UI
     def initialize(config = {})
       Config.setup(config)
