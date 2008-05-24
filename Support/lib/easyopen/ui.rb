@@ -11,15 +11,22 @@ module EasyOpen
       end
       
       if infos.size == 1
-        TextMate.go_to(infos[0]) 
+        go_to(infos[0]) 
         return infos[0]
       end
       
       displays = infos.map { |info| info[:display] }
       selected  = TextMate::UI.menu(displays)
       return unless selected
-      TextMate.go_to(infos[selected])
+      go_to(infos[selected])
       return infos[selected]
+    end
+    
+    def go_to(options = {})
+      ri = "txmt://open?url=file://#{e_url options[:file]}"
+      ri = ri + "&line=#{options[:line]}" if options[:line]
+      ri = ri + "&column=#{options[:column]}" if options[:column]
+      `open "#{ri}"`
     end
   end
 end
