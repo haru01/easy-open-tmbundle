@@ -17,7 +17,7 @@ module EasyOpen
     end
     
     it "ハッシュ：locationsに複数のロケーション情報が含まれていること" do
-      @result[:locations].size.should eql(11)
+      @result[:locations].should have_at_least(11).items
     end
 
     it "ハッシュ：locationsの一要素にファイルを開くためのロケーション情報（:line, :file_id)が含まれていること" do
