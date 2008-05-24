@@ -23,10 +23,10 @@ module EasyOpen
     end
     
     def go_to(options = {})
-      ri = "txmt://open?url=file://#{e_url options[:file]}"
-      ri = ri + "&line=#{options[:line]}" if options[:line]
-      ri = ri + "&column=#{options[:column]}" if options[:column]
-      `open "#{ri}"`
+      resource_identifier = "txmt://open?url=file://#{e_url options[:file]}"
+      resource_identifier = resource_identifier + "&line=#{options[:line]}" if options[:line]
+      resource_identifier = resource_identifier + "&column=#{options[:column]}" if options[:column]
+      `open "#{resource_identifier}"`
     end
   end
 end
