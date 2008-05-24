@@ -24,32 +24,47 @@ module EasyOpen
       puts "save_dir=>#{Config[:save_dir]}"
     end
   end
+
+  class Token
+    def tokenize(line)
+      if m = /(^\s*(class|def|module)\s*)([\w:]*)(.*)$/.match(line)
+        {
+          :def => m[2],
+          :pre_first_name => m[1],
+          :names => m[3].split("::"),
+          :args => m[4]
+        }
+      end
+    end
+  end
   
   class Parser
     def initialize
       @locations = []
       @files = []
       @name_locationids = {}
-      #TODO molude Hoge::Fugaに対応すること
-      @regular = /(^\s*(class|def|module)\s*)(\w*)(.*)$/
+      @token = Token.new
     end
     
     def parse(file_name)
       File.open(file_name) do |file|
         file.each_with_index do |line, index|
-          if m = @regular.match(line)
-            name = m[3].to_s
-            args = m[4].to_s if m[2].to_s == "def"
-            @files << file_name unless @files.include?(file_name)
-            @name_locationids[name] ||= []
-            @name_locationids[name] << @locations.size 
-            @locations << 
-              {
-                :file_id => @files.index(file_name),
-                :line => index + 1,
-                :column =>  m[1].size + 1,
-                :args => args
-              }
+          if t = @token.tokenize(line)
+            line = index + 1
+            first_colum = t[:pre_first_name].size + 1
+            t[:names].each_with_index { |name, ind|
+              t[:def] == "def" ? more_info = t[:args] : more_info = t[:def]
+              @files << file_name unless @files.include?(file_name)
+              @name_locationids[name] ||= []
+              @name_locationids[name] << @locations.size 
+              @locations << 
+                {
+                  :file_id => @files.index(file_name),
+                  :line => index + 1,
+                  :column =>  first_colum, #TODO Hoge::Fooの移動先にも対応すること
+                  :more_info => more_info
+                }
+            }
           end
         end
       end

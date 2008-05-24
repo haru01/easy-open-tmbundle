@@ -1,5 +1,6 @@
 require File.dirname(__FILE__) + '/ui'
 require File.dirname(__FILE__) + '/config'
+require File.dirname(__FILE__) + '/repository'
 
 module EasyOpen
   class OpenCallStack
@@ -18,17 +19,9 @@ module EasyOpen
     end
     
     def pop_call_stack
-      
-      call_stack = nil
-      open("#{Config[:call_stack_dump]}", "r") { |io|
-        call_stack = Marshal.load(io)
-      }
-      
+      call_stack = CallStackRepository.load
       node = call_stack.pop
-      
-      open("#{Config[:call_stack_dump]}", "w") { |mio|
-        Marshal.dump(call_stack, mio)
-      }
+      CallStackRepository.save call_stack
       return node
     end
   end
