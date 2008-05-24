@@ -21,13 +21,44 @@ module EasyOpen
     end
 
     it "ハッシュ：locationsの一要素にファイルを開くためのロケーション情報（:line, :file_id)が含まれていること" do
-      @result[:locations][0][:line].should eql(2)
       @result[:locations][0][:file_id].should eql(0)        
     end
 
     it "ハッシュ:name_locationidsに名前をキーに複数のlocationsのインデックス情報が含まれていること" do
       @result[:name_locationids]["hoge"].should_not eql(nil)
       @result[:name_locationids]["hoge"].size.should eql(3)
+    end
+  end
+  
+  describe Token do
+    before(:each) do
+      @token = Token.new
+    end
+    
+    it "should tokenize '	def open(hoge, foo)'" do
+      line = "	def open(hoge, foo)"
+      @token.tokenize(line)[:def].should == "def"
+      @token.tokenize(line)[:pre_first_name].should == "	def "
+      @token.tokenize(line)[:names].should == ["open"]
+      @token.tokenize(line)[:args].should == "(hoge, foo)"
+    end
+    
+    it "should tokenize 'module Hoge::Hogeogeoge'" do
+      line = 'module Hoge::Hogeogeoge'
+      @token.tokenize(line)[:def].should == "module"
+      @token.tokenize(line)[:pre_first_name].should == "module "
+      @token.tokenize(line)[:names].should == ["Hoge", "Hogeogeoge"]
+      @token.tokenize(line)[:args].should == ""
+    end
+    
+    it "should tokenize return nil if not include def module class" do
+      line = '      '
+      @token.tokenize(line).should be_nil
+    end
+    
+    it "should tokenize return nil if comment def module class" do
+      line = ' # def hoge'
+      @token.tokenize(line).should be_nil
     end
   end
 end
