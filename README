@@ -1,30 +1,36 @@
 = EasyOpen TextMate Bundle
 
-TextMate Bundle
-Easy Open support 
+Easy Open support by TextMate
 
-== feature list
 
-* open ruby class, module, def in project (F13, F4, F3)
-* open recent file in project (control shift h)
-* open gem 
+<h2>Feature List</h2>
 
-== Install
- 
- cd ~/Library/Application\ Support/TextMate/Bundles
- git clone git://github.com/haru01/easy-open-tmbundle.git EasyOpen.tmbundle
+ * open ruby class, module, def in project (F13, F4, F3)
+ * open recent file in project (control shift h)
+ * open gem 
 
-== Usase
+<h2>Installation</h2> 
 
-  0. run 'create_location_def_data_file' (F13)
-  1. move cursor to method name
-  2. run 'open_def' (F4)
-     it should move cursor to def
-  3. run 'back_open_def' (F3)
-     it should back cusor (1.) 
+<pre>
+cd ~/Library/Application\ Support/TextMate/Bundles
+git clone git://github.com/haru01/easy-open-tmbundle.git EasyOpen.tmbundle
+</pre>
 
-== Uninstall
+<h2>Usage</h2> 
 
- rm -rf ~/Library/Application\ Support/TextMate/Bundles/EasyOpen.tmbundle
- rm -rf ~/.easyopen_tmbundle
+<pre>
+0. run 'create_location_def_data_file' (F13)
+1. move cursor to method name
+2. run 'open_def' (F4)
+    it should move cursor to def
+3. run 'back_open_def' (F3)
+    it should back cusor (1.) 
+</pre>
 
+
+<h2>Installation</h2> 
+
+<pre>
+rm -rf ~/Library/Application\ Support/TextMate/Bundles/EasyOpen.tmbundle
+rm -rf ~/.easyopen_tmbundle
+</pre>
