@@ -18,6 +18,6 @@ Easy Open support by TextMate
   3. run 'back_open_def' (F3)
     it should back cusor (1.) 
 
-== Installation
+== UnInstallation
   rm -rf ~/Library/Application\ Support/TextMate/Bundles/EasyOpen.tmbundle
   rm -rf ~/.easyopen_tmbundle
