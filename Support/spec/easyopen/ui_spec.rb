@@ -29,7 +29,7 @@ module EasyOpen::UI
       end
       
       it "should open file" do
-        TextMate.should_receive(:go_to).with(@dummy)
+        @target.should_receive(:go_to).with(@dummy)
         @target.open_menu(@infos).should == @dummy
       end
     end
@@ -53,7 +53,7 @@ module EasyOpen::UI
       
       it "should open menu-> open file" do
         TextMate::UI.should_receive(:menu).with(["dummy_display1", "dummy_display2"]).and_return(1)
-        TextMate.should_receive(:go_to).with(@dummy2)
+        @target.should_receive(:go_to).with(@dummy2)
         @target.open_menu(@infos).should == @dummy2
       end
     end
