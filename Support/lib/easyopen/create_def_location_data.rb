@@ -50,10 +50,9 @@ module EasyOpen
       File.open(file_name) do |file|
         file.each_with_index do |line, index|
           if t = @token.tokenize(line)
-            line = index + 1
             first_colum = t[:pre_first_name].size + 1
             t[:names].each_with_index { |name, ind|
-              t[:def] == "def" ? more_info = t[:args] : more_info = t[:def]
+              t[:def] == "def" ? more_info = t[:args] : more_info = line
               @files << file_name unless @files.include?(file_name)
               @name_locationids[name] ||= []
               @name_locationids[name] << @locations.size 
