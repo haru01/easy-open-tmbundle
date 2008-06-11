@@ -50,8 +50,9 @@ module EasyOpen
       File.open(file_name) do |file|
         file.each_with_index do |line, index|
           if t = @token.tokenize(line)
-            first_colum = t[:pre_first_name].size + 1
+            colum = t[:pre_first_name].size + 1
             t[:names].each_with_index { |name, ind|
+              colum += t[:names][ind-1].size + "::".size if ind != 0
               t[:def] == "def" ? more_info = t[:args] : more_info = line
               @files << file_name unless @files.include?(file_name)
               @name_locationids[name] ||= []
@@ -60,7 +61,7 @@ module EasyOpen
                 {
                   :file_id => @files.index(file_name),
                   :line => index + 1,
-                  :column =>  first_colum, #TODO Hoge::Fooの移動先にも対応すること
+                  :column =>  colum,
                   :more_info => more_info
                 }
             }
