@@ -15,15 +15,17 @@ Easy Open support by TextMate
   0. run 'create_location_def_data_file' (F13)
   1. move cursor to method name
   2. run 'open_def' (F4)
-    it should move cursor to def
+     => move cursor to def
   3. run 'back_open_def' (F3)
-    it should back cusor (1.) 
+     => back cusor (1.) 
 
-== Usage(completionCommand)
+== Usage(completion => open_def)
  0. run 'create_location_def_data_file' (F13)
  1. type def name
  2. type (esc) current cusor 
-    it should auto completion def name
+    => auto completion def name
+ 3. run 'open_def' (F4)
+	  => move cursor to def
 
 == UnInstallation
   rm -rf ~/Library/Application\ Support/TextMate/Bundles/EasyOpen.tmbundle
