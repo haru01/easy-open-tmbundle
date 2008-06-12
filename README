@@ -19,7 +19,7 @@ Easy Open support by TextMate
   3. run 'back_open_def' (F3)
     it should back cusor (1.) 
 
-== Usage(complete code)
+== Usage(completionCommand)
  0. run 'create_location_def_data_file' (F13)
  1. type def name
  2. type (esc) current cusor 
