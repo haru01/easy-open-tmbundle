@@ -24,19 +24,19 @@ module EasyOpen
     end
     
     def menu_infos
-      def_data = DefDataRepository.load
-      locationids = def_data[:name_locationids][Config[:current_word]]
+      def_index = DefDataRepository.load
+      locationids = def_index[:name_locationids][Config[:current_word]]
       return [] unless locationids
       menu_infos = locationids.map do |id|
-        file_id = def_data[:locations][id][:file_id]
-        file = def_data[:files][file_id]
+        file_id = def_index[:locations][id][:file_id]
+        file = def_index[:files][file_id]
         display = "#{file.gsub("#{Config[:project_dir]}/", '')}"+ 
-                  ":#{def_data[:locations][id][:line]}" +
-                  ":#{def_data[:locations][id][:more_info]}"
+                  ":#{def_index[:locations][id][:line]}" +
+                  ":#{def_index[:locations][id][:more_info]}"
         {  
           :file => file,
-          :line => def_data[:locations][id][:line],
-          :column  => def_data[:locations][id][:column],
+          :line => def_index[:locations][id][:line],
+          :column  => def_index[:locations][id][:column],
           :display => display
         }
       end

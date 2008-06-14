@@ -7,8 +7,8 @@ module EasyOpen
           :project_dir      =>  ENV["TM_PROJECT_DIRECTORY"],
           :current_word     =>  ENV['TM_CURRENT_WORD'],
           :save_dir         => save_dir,
-          :def_location_dump => "#{save_dir}/def_location.dump",
-          :call_stack_dump    => "#{save_dir}/call_stack.dump",
+          :def_index_file => "#{save_dir}/def_index.dump",
+          :call_stack_file    => "#{save_dir}/call_stack.dump",
           :current_location => {:file => ENV["TM_FILEPATH"], :line => ENV["TM_LINE_NUMBER"], :column => ENV["TM_COLUMN_NUMBER"]},
           :current_file     => ENV['TM_FILEPATH']
         }

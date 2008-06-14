@@ -7,14 +7,14 @@
 	<key>command</key>
 	<string>#!/usr/bin/env ruby
 require ENV['TM_BUNDLE_SUPPORT'] + "/lib/easyopen/create_def_index_file"
-EasyOpen::CreateDefLocationData.new.run
+EasyOpen::CreateDefIndexFile.new.run
 </string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
 	<string></string>
 	<key>name</key>
-	<string>create_def_location_data_file</string>
+	<string>create_def_index_file</string>
 	<key>output</key>
 	<string>showAsTooltip</string>
 	<key>uuid</key>

@@ -4,42 +4,47 @@ module EasyOpen
   class CallStackRepository
     class << self
       def init
-        open("#{Config[:call_stack_dump]}", "w") { |mio|
+        open("#{Config[:call_stack_file]}", "w") { |mio|
           Marshal.dump([], mio)
         }
       end
       
       def save(call_stack)
-        open("#{Config[:call_stack_dump]}", "w") { |mio|
+        open("#{Config[:call_stack_file]}", "w") { |mio|
           Marshal.dump(call_stack, mio)
         }
       end
       
       def load
-        open("#{Config[:call_stack_dump]}", "r") { |io|
-          Marshal.load(io)        
-        }
+        begin
+          open("#{Config[:call_stack_file]}", "r") { |io|
+            Marshal.load(io)        
+          }          
+        rescue
+          puts "not found call_stack file. please create_def_index_file(F13)"
+          exit
+        end
       end
     end
   end
   
   class DefDataRepository
     class << self
-      def save(def_data)
-        open("#{Config[:def_location_dump]}", "w") { |mio|
-          Marshal.dump(def_data, mio)
+      def save(def_index)
+        open("#{Config[:def_index_file]}", "w") { |mio|
+          Marshal.dump(def_index, mio)
         }
       end
       
       def load
         begin
-          def_location_data = nil
-          open("#{Config[:def_location_dump]}", "r") { |io|
-            def_location_data = Marshal.load(io)
+          def_index = nil
+          open("#{Config[:def_index_file]}", "r") { |io|
+            def_index = Marshal.load(io)
           }
-          return def_location_data
+          return def_index
         rescue
-          puts "not found def_location_data file. please create_def_location_data_file before open_def"
+          puts "not found def_index file. please create_def_index_file(F13) before open_def"
           exit
         end      
       end

@@ -3,14 +3,14 @@ require File.dirname(__FILE__) + '/config'
 require File.dirname(__FILE__) + '/repository'
 
 module EasyOpen
-  class CreateDefLocationData
+  class CreateDefIndexFile
     def initialize(config = {})
       Config.setup(config)
     end
     
     def run
       if Config[:project_dir].nil?
-        puts "TM_PROJECT_DIRECTORY is nil. can't create def_location_data"
+        puts "TM_PROJECT_DIRECTORY is nil. can't create def_index_file"
         exit
       end
       parser = Parser.new
@@ -18,9 +18,9 @@ module EasyOpen
         parser.parse(file_name)
       end
       FileUtils::mkdir_p("#{Config[:save_dir]}")
-      DefDataRepository.save parser.def_data      
+      DefDataRepository.save parser.def_index      
       CallStackRepository.init
-      puts "location_file is created, and call stack file is cleaned."
+      puts "created def index file, and cleaned call stack file"
       puts "save_dir=>#{Config[:save_dir]}"
     end
   end
@@ -70,7 +70,7 @@ module EasyOpen
       end
     end
     
-    def def_data
+    def def_index
       {
         :name_locationids => @name_locationids, 
         :files => @files, 

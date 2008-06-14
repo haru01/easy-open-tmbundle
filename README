@@ -12,7 +12,7 @@ Easy Open support by TextMate
   git clone git://github.com/haru01/easy-open-tmbundle.git EasyOpen.tmbundle
 
 == Usage (open def)
-  0. run 'create_location_def_data_file' (F13)
+  0. run 'create_def_index_file' (F13)
   1. move cursor to method name
   2. run 'open_def' (F4)
      => move cursor to def
@@ -20,7 +20,7 @@ Easy Open support by TextMate
      => back cusor (1.) 
 
 == Usage(completion => open_def)
- 0. run 'create_location_def_data_file' (F13)
+ 0. run 'create_def_index_file' (F13)
  1. type def name
  2. type (esc) current cusor 
     => auto completion def name
