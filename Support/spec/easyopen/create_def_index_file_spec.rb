@@ -1,6 +1,6 @@
 require "pp"
 
-require File.dirname(__FILE__) + "/../../lib/easyopen/create_def_location_data"
+require File.dirname(__FILE__) + "/../../lib/easyopen/create_def_index_file"
 
 module EasyOpen
   describe "メソッドなどの位置情報のデータ構造について" do

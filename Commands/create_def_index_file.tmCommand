@@ -6,7 +6,7 @@
 	<string>nop</string>
 	<key>command</key>
 	<string>#!/usr/bin/env ruby
-require ENV['TM_BUNDLE_SUPPORT'] + "/lib/easyopen/create_def_location_data"
+require ENV['TM_BUNDLE_SUPPORT'] + "/lib/easyopen/create_def_index_file"
 EasyOpen::CreateDefLocationData.new.run
 </string>
 	<key>input</key>
