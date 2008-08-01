@@ -9,6 +9,9 @@ class Hooooo
 	
 	def open(hoge)
 	end
+	
+	def self.hogefuga
+  end
 end
 
 class Fuga < Object; end
@@ -26,5 +29,7 @@ end
 
 module Foo::Hogeo::HHHH
 end
+
+hogefuga
 
 #	 def hogeoge

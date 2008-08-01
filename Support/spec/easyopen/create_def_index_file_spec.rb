@@ -35,6 +35,14 @@ module EasyOpen
       @token = Token.new
     end
     
+    it "should tokenize '	def self.hogefuga(hoge, foo)'" do
+      result = @token.tokenize('	def self.hogefuga(hoge, foo)')
+      result[:def].should == "def"
+      result[:names].should == "hogefuga"
+      result[:args].should == "(hoge, foo)"
+      result[:pre_first_name].should == "	def self."
+    end
+    
     it "should tokenize '	def open(hoge, foo)'" do
       line = "	def open(hoge, foo)"
       @token.tokenize(line)[:def].should == "def"

@@ -27,11 +27,20 @@ module EasyOpen
 
   class Token
     def tokenize(line)
-      if m = /(^\s*(class|def|module)\s*)([\w:]*)(.*)$/.match(line)
+      if m = /(^\s*(class|def|module)\s*)([\w:\.]*)(.*)$/.match(line)
+        names = if m[3].include?("self.")
+          m[3].gsub("self.", "")
+        else
+          m[3].split("::")
+        end
+        
+        pre_first_name = m[1]
+        pre_first_name += "self." if m[3].include?("self.")
+        
         {
           :def => m[2],
-          :pre_first_name => m[1],
-          :names => m[3].split("::"),
+          :pre_first_name => pre_first_name,
+          :names => names,
           :args => m[4]
         }
       end
