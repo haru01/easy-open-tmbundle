@@ -1,5 +1,5 @@
 = EasyOpen TextMate Bundle
-Easy Open support by TextMate
+Ruby Easy Open support by TextMate
 
 == Feature List
   * open ruby class, module, def in project (F13, F4, F3)
@@ -21,7 +21,7 @@ Easy Open support by TextMate
 
 == Usage(completion => open_def)
  0. run 'create_def_index_file' (F13)
- 1. type def name
+ 1. type def name (part)
  2. type (esc) current cusor 
     => auto completion def name
  3. run 'open_def' (F4)
@@ -31,5 +31,4 @@ Easy Open support by TextMate
   rm -rf ~/Library/Application\ Support/TextMate/Bundles/EasyOpen.tmbundle
   rm -rf ~/.easyopen_tmbundle
 
-
-== TODO
+== 

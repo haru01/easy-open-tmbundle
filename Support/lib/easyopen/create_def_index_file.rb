@@ -78,7 +78,36 @@ module EasyOpen
         end
       end
     end
-    
+
+    # example
+    #    {:name_locationids=>
+    #      {...
+    #       "Token"=>[29],
+    #       "tokenize"=>[30],
+    #       ...
+    #       "initialize"=>[18, 27, 32, 38, 45], # id '38' is open_def.rb
+    #       ...},
+    #     :locations=>
+    #      [{:column=>7, :line=>1, :more_info=>"class Hooooo\n", :file_id=>0}, #0
+    #       {:column=>6, :line=>2, :more_info=>"", :file_id=>0}, #1
+    #       ...
+    #       {:column=>9,
+    #        :line=>6,
+    #        :more_info=>"  class CreateDefIndexFile\n",
+    #        :file_id=>3}, #26 class CreateDefIndexFile in create_def_index_file.rb
+    #        ...
+    #       {:column=>9, :line=>28, :more_info=>"  class Token\n", :file_id=>3}, #29 class Token in create_def_index_file.rb
+    #       {:column=>9, :line=>29, :more_info=>"(line)", :file_id=>3}, #30 def tokenize(line) in create_def_index_file.rb
+    #       ...
+    #       {:column=>9, :line=>7, :more_info=>"(config = {})", :file_id=>3}, #38 def initialize(config = {}) in create_def_index_file.rb
+    #       ...],
+    #     :files=>
+    #      ["/Users/haru01/Library/Application Support/TextMate/Bundles/EasyOpen.tmbundle/Support/fixtures/ruby_code.rb", #0
+    #       "/Users/haru01/Library/Application Support/TextMate/Bundles/EasyOpen.tmbundle/Support/lib/easyopen/back_open_def.rb", #1
+    #       "/Users/haru01/Library/Application Support/TextMate/Bundles/EasyOpen.tmbundle/Support/lib/easyopen/config.rb", #2
+    #       "/Users/haru01/Library/Application Support/TextMate/Bundles/EasyOpen.tmbundle/Support/lib/easyopen/create_def_index_file.rb", #3
+    #        ...]
+    #    }
     def def_index
       {
         :name_locationids => @name_locationids, 
