@@ -24,9 +24,9 @@ module EasyOpen
       @result[:locations][0][:file_id].should eql(0)        
     end
 
-    it "ハッシュ:name_locationidsに名前をキーに複数のlocationsのインデックス情報が含まれていること" do
-      @result[:name_locationids]["hoge"].should_not eql(nil)
-      @result[:name_locationids]["hoge"].size.should eql(3)
+    it "ハッシュ:name_locationIdsに名前をキーに複数のlocationsのインデックス情報が含まれていること" do
+      @result[:name_locationIds]["hoge"].should_not eql(nil)
+      @result[:name_locationIds]["hoge"].size.should eql(3)
     end
   end
   

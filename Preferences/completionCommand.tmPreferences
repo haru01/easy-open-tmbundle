@@ -12,7 +12,7 @@
 		<string>#!/usr/bin/env ruby
 open("#{ENV["HOME"]}/.easyopen_tmbundle#{ENV["TM_PROJECT_DIRECTORY"]}/def_index.dump", "r") { |io|
 	def_index = Marshal.load(io)
-	puts def_index[:name_locationids].keys.select { |e| e.include?(ENV["TM_CURRENT_WORD"].to_s) }
+	puts def_index[:name_locationIds].keys.select { |e| e.include?(ENV["TM_CURRENT_WORD"].to_s) }
 }</string>
 	</dict>
 	<key>uuid</key>

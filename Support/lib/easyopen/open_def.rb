@@ -25,7 +25,7 @@ module EasyOpen
     
     def menu_infos
       def_index = DefDataRepository.load
-      locationids = def_index[:name_locationids][Config[:current_word]]
+      locationids = def_index[:name_locationIds][Config[:current_word]]
       return [] unless locationids
       menu_infos = locationids.map do |id|
         file_id = def_index[:locations][id][:file_id]

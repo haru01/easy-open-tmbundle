@@ -51,7 +51,7 @@ module EasyOpen
     def initialize
       @locations = []
       @files = []
-      @name_locationids = {}
+      @name_locationIds = {}
       @token = Token.new
     end
     
@@ -64,8 +64,8 @@ module EasyOpen
               colum += t[:names][ind-1].size + "::".size if ind != 0
               t[:def] == "def" ? more_info = t[:args] : more_info = line
               @files << file_name unless @files.include?(file_name)
-              @name_locationids[name] ||= []
-              @name_locationids[name] << @locations.size 
+              @name_locationIds[name] ||= []
+              @name_locationIds[name] << @locations.size 
               @locations << 
                 {
                   :file_id => @files.index(file_name),
@@ -80,7 +80,7 @@ module EasyOpen
     end
 
     # example
-    #    {:name_locationids=>
+    #    {:name_locationIds=>
     #      {...
     #       "Token"=>[29],
     #       "tokenize"=>[30],
@@ -110,7 +110,7 @@ module EasyOpen
     #    }
     def def_index
       {
-        :name_locationids => @name_locationids, 
+        :name_locationIds => @name_locationIds, 
         :files => @files, 
         :locations => @locations
       }
