@@ -85,7 +85,7 @@ module EasyOpen
     #       "Token"=>[29],
     #       "tokenize"=>[30],
     #       ...
-    #       "initialize"=>[18, 27, 32, 38, 45], # id '38' is open_def.rb
+    #       "initialize"=>[18, 27, 32, 38, 45], # locationid '38' is CreateDefIndexFile#initialize
     #       ...},
     #     :locations=>
     #      [{:column=>7, :line=>1, :more_info=>"class Hooooo\n", :file_id=>0}, #0
@@ -94,12 +94,12 @@ module EasyOpen
     #       {:column=>9,
     #        :line=>6,
     #        :more_info=>"  class CreateDefIndexFile\n",
-    #        :file_id=>3}, #26 class CreateDefIndexFile in create_def_index_file.rb
+    #        :file_id=>3}, #29 file_id=>3 is create_def_index_file.rb
     #        ...
-    #       {:column=>9, :line=>28, :more_info=>"  class Token\n", :file_id=>3}, #29 class Token in create_def_index_file.rb
-    #       {:column=>9, :line=>29, :more_info=>"(line)", :file_id=>3}, #30 def tokenize(line) in create_def_index_file.rb
+    #       {:column=>9, :line=>28, :more_info=>"  class Token\n", :file_id=>3}, 
+    #       {:column=>9, :line=>29, :more_info=>"(line)", :file_id=>3},
     #       ...
-    #       {:column=>9, :line=>7, :more_info=>"(config = {})", :file_id=>3}, #38 def initialize(config = {}) in create_def_index_file.rb
+    #       {:column=>9, :line=>7, :more_info=>"(config = {})", :file_id=>3},
     #       ...],
     #     :files=>
     #      ["/Users/haru01/Library/Application Support/TextMate/Bundles/EasyOpen.tmbundle/Support/fixtures/ruby_code.rb", #0
