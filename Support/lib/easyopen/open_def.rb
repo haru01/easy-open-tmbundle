@@ -32,7 +32,7 @@ module EasyOpen
         file = def_index[:files][file_id]
         display = "#{file.gsub("#{Config[:project_dir]}/", '')}"+ 
                   ":#{def_index[:locations][id][:line]}" +
-                  ":#{def_index[:locations][id][:more_info]}"
+                  ": #{def_index[:locations][id][:more_info]}"
         {  
           :file => file,
           :line => def_index[:locations][id][:line],
