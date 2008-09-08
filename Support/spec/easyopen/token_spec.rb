@@ -11,6 +11,12 @@ describe JavaScriptToken do
     result[:pre_first_str].should == "JSSpec."      
   end
   
+  it "should tokeninze 'JSSpec.Executor = function (target, onSuccess, onException) {'" do
+    result = @token.tokenize('JSSpec.Executor = function (target, onSuccess, onException) {')
+    result[:names].should == "Executor"
+    result[:pre_first_str].should == "JSSpec."      
+  end
+  
   it "should tokenize '  grep: function(filter, iterator, context) {'" do
     result = @token.tokenize('  grep: function(filter, iterator, context) {')
     result[:names].should == "grep"
