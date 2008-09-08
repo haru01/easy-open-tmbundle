@@ -46,7 +46,6 @@ module EasyOpen
             colum = t[:pre_first_str].size + 1
             t[:names].each_with_index { |name, ind|
               colum += t[:names][ind-1].size + "::".size if ind != 0
-              t[:def] == "def" ? more_info = t[:args] : more_info = line
               @files << file_name unless @files.include?(file_name)
               @name_locationIds[name] ||= []
               @name_locationIds[name] << @locations.size 
@@ -55,7 +54,7 @@ module EasyOpen
                   :file_id => @files.index(file_name),
                   :line => index + 1,
                   :column =>  colum,
-                  :more_info => more_info
+                  :more_info => line,
                 }
             }
           end
