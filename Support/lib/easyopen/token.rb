@@ -1,19 +1,17 @@
 class JavaScriptToken
   def tokenize(line)
-    if m = /^([^\s]*)\s*=\s*function(\(.*\)).*\{.*$/.match(line)
+    if m = /^([^\s]*)\s*=\s*function\s*(\(.*\)).*\{.*$/.match(line)
       name = m[1].split(".").last
       tmp = m[1].split(".")
       tmp.pop
       pre = tmp.join(".")
       pre += "."
       {
-        :def => "function",
         :names => m[1].split(".").last,
         :pre_first_str => pre
       }
     elsif m = /^([\s]*)(.*):\s*function.*$/.match(line)
       {
-        :def => "function",
         :names => m[2],
         :pre_first_str => m[1]
       }
@@ -34,7 +32,6 @@ class RubyToken
       pre_first_str += "self." if m[3].include?("self.")
       
       {
-        :def => m[2],
         :pre_first_str => pre_first_str,
         :names => names,
       }
