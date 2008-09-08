@@ -14,7 +14,8 @@ module EasyOpen
         exit
       end
       parser = Parser.new
-      Dir.glob("#{Config[:project_dir]}/**/*.{rb,js}").each do |file_name|
+      extnames = EasyOpen::Config[:tokens].keys.join(",")
+      Dir.glob("#{Config[:project_dir]}/**/*.{#{extnames}}").each do |file_name|
         parser.parse(file_name)
       end
       FileUtils::mkdir_p("#{Config[:save_dir]}")
@@ -36,13 +37,13 @@ module EasyOpen
     def parse(file_name)
       File.open(file_name) do |file|
         file.each_with_index do |line, index|
-          token = @tokens[File.extname(file_name)]
+          token = @tokens[File.extname(file_name).sub(".", "")]
           unless token
             puts "not support extname=>#{File.extname(file_name)}"
             return
           end
           if t = token.tokenize(line)
-            colum = t[:pre_first_name].size + 1
+            colum = t[:pre_first_str].size + 1
             t[:names].each_with_index { |name, ind|
               colum += t[:names][ind-1].size + "::".size if ind != 0
               t[:def] == "def" ? more_info = t[:args] : more_info = line

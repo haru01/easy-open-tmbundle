@@ -5,8 +5,8 @@ module EasyOpen
     class << self
       def defaults
         tokens = { 
-          ".rb" => RubyToken.new,
-          ".js" => JavaScriptToken.new,
+          "rb" => RubyToken.new,
+          "js" => JavaScriptToken.new,
         }
         
         save_dir = "#{ENV["HOME"]}/.easyopen_tmbundle#{ENV["TM_PROJECT_DIRECTORY"]}"
