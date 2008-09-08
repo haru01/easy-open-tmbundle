@@ -30,9 +30,24 @@ module EasyOpen
     end
   end
   
-  describe Token do
+
+  describe JavaScriptToken do
     before(:each) do
-      @token = Token.new
+      @token = JavaScriptToken.new
+    end
+    
+    it "should tokeninze class" do
+      result = @token.tokenize('JSSpec.Executor = function(target, onSuccess, onException) {')
+      result[:def].should == "function"
+      result[:names].should == "Executor"
+      result[:args].should == "(target, onSuccess, onException)"
+      result[:pre_first_name].should == "JSSpec."      
+    end
+  end
+  
+  describe RubyToken do
+    before(:each) do
+      @token = RubyToken.new
     end
     
     it "should tokenize '	def self.hogefuga(hoge, foo)'" do

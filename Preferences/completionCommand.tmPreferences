@@ -5,7 +5,7 @@
 	<key>name</key>
 	<string>completionCommand</string>
 	<key>scope</key>
-	<string>source.ruby</string>
+	<string>source.ruby,source.js</string>
 	<key>settings</key>
 	<dict>
 		<key>completionCommand</key>

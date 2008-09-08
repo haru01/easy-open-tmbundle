@@ -17,7 +17,7 @@ EasyOpen::BackOpenDef.new.run</string>
 	<key>output</key>
 	<string>showAsTooltip</string>
 	<key>scope</key>
-	<string>source.ruby</string>
+	<string>source.ruby,source.js</string>
 	<key>uuid</key>
 	<string>1E135F00-FE33-4BDE-AA2C-31A6C3B3943D</string>
 </dict>

@@ -14,7 +14,7 @@ module EasyOpen
         exit
       end
       parser = Parser.new
-      Dir.glob("#{Config[:project_dir]}/**/*.rb").each do |file_name|
+      Dir.glob("#{Config[:project_dir]}/**/*.{rb,js}").each do |file_name|
         parser.parse(file_name)
       end
       FileUtils::mkdir_p("#{Config[:save_dir]}")
@@ -25,7 +25,26 @@ module EasyOpen
     end
   end
 
-  class Token
+  class JavaScriptToken
+    def tokenize(line)
+      if m = /^([^\s]*)\s*=\s*function(\(.*\)).*\{.*$/.match(line)
+        name = m[1].split(".").last
+        tmp = m[1].split(".")
+        tmp.pop
+        pre = tmp.join(".")
+        pre += "."
+        {
+          :def => "function",
+          :names => m[1].split(".").last,
+          :args => m[2],
+          :pre_first_name => pre
+
+        }
+      end        
+    end
+  end
+  
+  class RubyToken
     def tokenize(line)
       if m = /(^\s*(class|def|module)\s*)([\w:\.]*)(.*)$/.match(line)
         names = if m[3].include?("self.")
@@ -52,13 +71,21 @@ module EasyOpen
       @locations = []
       @files = []
       @name_locationIds = {}
-      @token = Token.new
+      @tokens = { 
+        ".rb" => RubyToken.new,
+        ".js" => JavaScriptToken.new,
+      }
     end
     
     def parse(file_name)
       File.open(file_name) do |file|
         file.each_with_index do |line, index|
-          if t = @token.tokenize(line)
+          token = @tokens[File.extname(file_name)]
+          unless token
+            puts "not support extname=>#{File.extname(file_name)}"
+            return
+          end
+          if t = @tokens[File.extname(file_name)].tokenize(line)
             colum = t[:pre_first_name].size + 1
             t[:names].each_with_index { |name, ind|
               colum += t[:names][ind-1].size + "::".size if ind != 0
@@ -82,7 +109,7 @@ module EasyOpen
     # example
     #    {:name_locationIds=>
     #      {...
-    #       "Token"=>[29],
+    #       "RubyToken"=>[29],
     #       "tokenize"=>[30],
     #       ...
     #       "initialize"=>[18, 27, 32, 38, 45], # locationid '38' is CreateDefIndexFile#initialize
@@ -96,7 +123,7 @@ module EasyOpen
     #        :more_info=>"  class CreateDefIndexFile\n",
     #        :file_id=>3}, #29 file_id=>3 is create_def_index_file.rb
     #        ...
-    #       {:column=>9, :line=>28, :more_info=>"  class Token\n", :file_id=>3}, 
+    #       {:column=>9, :line=>28, :more_info=>"  class RubyToken\n", :file_id=>3}, 
     #       {:column=>9, :line=>29, :more_info=>"(line)", :file_id=>3},
     #       ...
     #       {:column=>9, :line=>7, :more_info=>"(config = {})", :file_id=>3},
