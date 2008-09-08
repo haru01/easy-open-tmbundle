@@ -5,11 +5,18 @@ describe JavaScriptToken do
     @token = JavaScriptToken.new
   end
   
-  it "should tokeninze class" do
+  it "should tokeninze 'JSSpec.Executor = function(target, onSuccess, onException) {'" do
     result = @token.tokenize('JSSpec.Executor = function(target, onSuccess, onException) {')
     result[:def].should == "function"
     result[:names].should == "Executor"
     result[:pre_first_str].should == "JSSpec."      
+  end
+  
+  it "should tokenize '  grep: function(filter, iterator, context) {'" do
+    result = @token.tokenize('  grep: function(filter, iterator, context) {')
+    result[:def].should == "function"
+    result[:names].should == "grep"
+    result[:pre_first_str].should == "  "          
   end
 end
   
