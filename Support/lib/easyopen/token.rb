@@ -7,15 +7,17 @@ module EasyOpen
         tmp.pop
         pre = tmp.join(".")
         pre += "."
-        {
-          :names => m[1].split(".").last,
-          :pre_first_str => pre
-        }
+        
+        [{ :name => m[1].split(".").last,
+           :column => pre.size + 1,
+           :more_info => line },
+        ]
       elsif m = /^([\s]*)(.*):\s*function.*$/.match(line)
-        {
-          :names => m[2],
-          :pre_first_str => m[1]
-        }
+        
+        [{ :name => m[2],
+           :column => m[1].size + 1,
+           :more_info => line },
+        ]
       end
     end
   end
@@ -23,19 +25,26 @@ module EasyOpen
   class RubyToken
     def tokenize(line)
       if m = /(^\s*(class|def|module)\s*)([\w:\.]*)(.*)$/.match(line)
-        names = if m[3].include?("self.")
-          m[3].gsub("self.", "")
+        if m[3].include?("self.")
+          name = m[3].gsub("self.", "")
+          pre_first_str = m[1] + "self."
+          
+          [{ :column => pre_first_str.size + 1,
+             :name => name,
+             :more_info => line },]
         else
-          m[3].split("::")
+          names = m[3].split("::")
+          pre_first_str = m[1]
+          colum = pre_first_str.size + 1
+          
+          names.map do |name|
+            current = colum
+            colum += name.size + "::".size
+            { :name => name,
+              :column => current,
+              :more_info => line }
+          end
         end
-      
-        pre_first_str = m[1]
-        pre_first_str += "self." if m[3].include?("self.")
-      
-        {
-          :pre_first_str => pre_first_str,
-          :names => names,
-        }
       end
     end
   end
