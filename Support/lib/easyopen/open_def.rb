@@ -29,12 +29,12 @@ module EasyOpen
       return [] unless locationids
       menu_infos = locationids.map do |id|
         file_id = def_index[:locations][id][:file_id]
-        file = def_index[:files][file_id]
-        display = "#{file.gsub("#{Config[:project_dir]}/", '')}"+ 
+        filepath = def_index[:files][file_id]
+        display = "#{filepath.gsub("#{Config[:project_dir]}/", '')}"+ 
                   ":#{def_index[:locations][id][:line]}" +
                   ": #{def_index[:locations][id][:more_info]}"
         {  
-          :file => file,
+          :file => filepath,
           :line => def_index[:locations][id][:line],
           :column  => def_index[:locations][id][:column],
           :display => display

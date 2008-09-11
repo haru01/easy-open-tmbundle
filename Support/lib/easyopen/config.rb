@@ -1,18 +1,10 @@
-require File.dirname(__FILE__) + '/token'
-
 module EasyOpen
   class Config
     class << self
       def defaults
-        tokens = { 
-          "rb" => RubyToken.new,
-          "js" => JavaScriptToken.new,
-        }
-        
         save_dir = "#{ENV["HOME"]}/.easyopen_tmbundle#{ENV["TM_PROJECT_DIRECTORY"]}"
         
         @defaults ||= {
-          :tokens             => tokens,
           :project_dir        =>  ENV["TM_PROJECT_DIRECTORY"],
           :current_word       =>  ENV['TM_CURRENT_WORD'],
           :save_dir           => save_dir,

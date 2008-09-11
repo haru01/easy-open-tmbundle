@@ -1,6 +1,7 @@
 require 'fileutils'
 require File.dirname(__FILE__) + '/config'
 require File.dirname(__FILE__) + '/repository'
+require File.dirname(__FILE__) + '/extension/user_conf'
 
 module EasyOpen
   class CreateDefIndexFile
@@ -14,7 +15,7 @@ module EasyOpen
         exit
       end
       parser = Parser.new
-      extnames = EasyOpen::Config[:tokens].keys.join(",")
+      extnames = EasyOpen::Extension::UserConf.tokens.keys.join(",")
       Dir.glob("#{Config[:project_dir]}/**/*.{#{extnames}}").each do |file_name|
         parser.parse(file_name)
       end
@@ -27,7 +28,7 @@ module EasyOpen
   end
   
   class Parser
-    def initialize(tokens = Config[:tokens])
+    def initialize(tokens = Extension::UserConf.tokens)
       @locations = []
       @files = []
       @name_locationIds = {}
