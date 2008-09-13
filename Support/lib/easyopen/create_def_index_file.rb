@@ -43,8 +43,7 @@ module EasyOpen
             puts "not support extname=>#{File.extname(file_name)}"
             return
           end
-          if ts = token.tokenize(line)
-            ts.each { |t|
+          if t = token.tokenize(line)
               @files << file_name unless @files.include?(file_name)
               @name_locationIds[t[:name]] ||= []
               @name_locationIds[t[:name]] << @locations.size 
@@ -55,7 +54,6 @@ module EasyOpen
                   :column =>  t[:column],
                   :more_info => t[:more_info],
                 }
-            }
           end
         end
       end
