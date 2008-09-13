@@ -8,6 +8,9 @@ module EasyOpen
     
     def initialize(config = {})
       Config.setup(config)
+      @current_location = { :file => ENV["TM_FILEPATH"], 
+                            :line => ENV["TM_LINE_NUMBER"], 
+                            :column => ENV["TM_COLUMN_NUMBER"]}
     end
     
     def run
@@ -19,7 +22,7 @@ module EasyOpen
     def push_call_stack
       call_stack = nil      
       call_stack = CallStackRepository.load
-      call_stack.push Config[:current_location]
+      call_stack.push @current_location
       CallStackRepository.save call_stack
     end
     
