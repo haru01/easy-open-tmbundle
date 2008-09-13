@@ -10,10 +10,6 @@ module EasyOpen
           :save_dir           => save_dir,
           :def_index_file     => "#{save_dir}/def_index.dump",
           :call_stack_file    => "#{save_dir}/call_stack.dump",
-          :current_location   => {
-                                  :file => ENV["TM_FILEPATH"], 
-                                  :line => ENV["TM_LINE_NUMBER"], 
-                                  :column => ENV["TM_COLUMN_NUMBER"]},
           :current_file       => ENV['TM_FILEPATH']
         }
       end
