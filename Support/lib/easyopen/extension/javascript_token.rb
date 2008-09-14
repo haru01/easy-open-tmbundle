@@ -7,21 +7,23 @@ module EasyOpen
           pre = m[1].sub(/#{name}$/, "")
         
           { :name => m[1].split(".").last,
-             :column => pre.size + 1,
-             :more_info => line }
+            :column => pre.size + 1,
+            :more_info => line }
         elsif m = /^([\s]*)(.*):\s*function.*$/.match(line)
         
           { :name => m[2],
-             :column => m[1].size + 1,
-             :more_info => line }
+            :column => m[1].size + 1,
+            :more_info => line }
         elsif m = /^(\s*function\s*)(.*)\s*\(.*$/.match(line)
-            { :name => m[2],
-             :column => m[1].size + 1,
-             :more_info => line }
+          
+          { :name => m[2],
+            :column => m[1].size + 1,
+            :more_info => line }
         elsif m = /^([\s]*)(.*):\s*\{\s*$/.match(line)
-             { :name => m[2],
-                :column => m[1].size + 1,
-                :more_info => line }
+          
+          { :name => m[2],
+            :column => m[1].size + 1,
+            :more_info => line }
         end
       end
     end

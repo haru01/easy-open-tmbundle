@@ -8,8 +8,8 @@ module EasyOpen
             pre_first_str = m[1] + "self."
             
             { :column => pre_first_str.size + 1,
-               :name => name,
-               :more_info => line }
+              :name => name,
+              :more_info => line }
           else
             names = m[3].split("::")
             pre_first_str = m[1]
