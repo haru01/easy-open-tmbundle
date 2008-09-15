@@ -8,7 +8,6 @@ module EasyOpen
       Config.defaults[:save_dir].should == "#{ENV["HOME"]}/.easyopen_tmbundle#{ENV["TM_PROJECT_DIRECTORY"]}"
       Config.defaults[:def_index_file].should == "#{ENV["HOME"]}/.easyopen_tmbundle#{ENV["TM_PROJECT_DIRECTORY"]}/def_index.dump"
       Config.defaults[:call_stack_file].should == "#{ENV["HOME"]}/.easyopen_tmbundle#{ENV["TM_PROJECT_DIRECTORY"]}/call_stack.dump"
-      Config.defaults[:current_location].should == {:file => ENV["TM_FILEPATH"], :line => ENV["TM_LINE_NUMBER"], :column => ENV["TM_COLUMN_NUMBER"]}
       Config.defaults[:current_file].should == ENV['TM_FILEPATH']
     end
     
