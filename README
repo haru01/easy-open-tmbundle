@@ -1,8 +1,12 @@
 = EasyOpen TextMate Bundle
-Ruby Easy Open support by TextMate
+ Easy Open method, class etc.. support by TextMate
+
+== Support Language
+  * Ruby
+  * JavaScript
 
 == Feature List
-  * open ruby class, module, def in project (F13, F4, F3)
+  * open method in project (F13, F4, F3)
   * code completion (ESC)
   * open recent file in project (control shift h)
   * open gem 
@@ -31,6 +35,6 @@ Ruby Easy Open support by TextMate
   rm -rf ~/Library/Application\ Support/TextMate/Bundles/EasyOpen.tmbundle
   rm -rf ~/.easyopen_tmbundle
 
+  
 == TODO
  * Support 'alias_method'
- * Support JavaScript
