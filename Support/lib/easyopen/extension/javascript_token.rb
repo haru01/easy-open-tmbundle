@@ -4,7 +4,7 @@ module EasyOpen
       def tokenize(line)
         if m = /^(\s*([^\s]*))\s*=\s*function\s*(\(.*\)).*\{.*$/.match(line)
           name = m[2].split(".").last
-          pre = m[1].sub(/#{name}$/, "")
+          pre = m[1].sub(/#{Regexp.escape("#{name}")}$/, "")
         
           { :name => m[1].split(".").last,
             :column => pre.size + 1,
