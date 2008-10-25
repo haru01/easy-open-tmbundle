@@ -1,5 +1,7 @@
 require File.dirname(__FILE__) + "/ruby_token"
 require File.dirname(__FILE__) + "/javascript_token"
+require File.dirname(__FILE__) + "/java_token"
+
 
 
 module EasyOpen
@@ -9,6 +11,7 @@ module EasyOpen
         { 
           "rb" => RubyToken.new,
           "js" => JavaScriptToken.new,
+          "java" => JavaToken.new
         }
       end
     end
