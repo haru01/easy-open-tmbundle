@@ -6,9 +6,9 @@
   * JavaScript
 
 == Feature List
-  * open method in project (F13, F4, F3)
-  * code completion (ESC)
-  * open recent file in project (control shift h)
+  * open method in project
+  * code completion
+  * open recent file in project (control command h)
   * open gem 
 
 == Installation 
@@ -16,19 +16,18 @@
   git clone git://github.com/haru01/easy-open-tmbundle.git EasyOpen.tmbundle
 
 == Usage (open def)
-  0. run 'create_def_index_file' (F13)
+  0. run 'create_def_index_file' (command F12)
   1. move cursor to method name
-  2. run 'open_def' (F4)
+  2. run 'open_def' (control command j)
      => move cursor to def
-  3. run 'back_open_def' (F3)
+  3. run 'back_open_def' (control command k)
      => back cusor (1.) 
 
 == Usage(completion => open_def)
- 0. run 'create_def_index_file' (F13)
  1. type def name (part)
  2. type (esc) current cusor 
     => auto completion def name
- 3. run 'open_def' (F4)
+ 3. run 'open_def' (control command j)
 	  => move cursor to def
 
 == UnInstallation
