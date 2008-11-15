@@ -21,7 +21,7 @@ module EasyOpen
             Marshal.load(io)        
           }          
         rescue
-          puts "not found call_stack file. please create_def_index_file(F13)"
+          puts "not found call_stack file. please create_def_index_file(command F12)"
           exit
         end
       end
@@ -44,7 +44,7 @@ module EasyOpen
           }
           return def_index
         rescue
-          puts "not found def_index file. please create_def_index_file(F13) before open_def"
+          puts "not found def_index file. please create_def_index_file(command F12) before open_def"
           exit
         end      
       end
