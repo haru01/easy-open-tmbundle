@@ -6,6 +6,12 @@ module EasyOpen::Extension
       @token = JavaToken.new
     end
 
+    it "should ignore token '         return getDeploymentModelFactory().newEndpoint(targetBean);'" do
+      line = '         return getDeploymentModelFactory().newEndpoint(targetBean);'
+      result = @token.tokenize(line)
+      result.should be_nil      
+    end
+    
     it "should ignore token '   getVersionTag(); '" do
       line = '   getVersionTag(); '
       result = @token.tokenize(line)
