@@ -5,6 +5,14 @@ module EasyOpen::Extension
     before(:each) do
       @token = JavaToken.new
     end
+    
+    it "should token '   public void boot(final String[] args) throws Exception'" do
+      line = "   public void boot(final String[] args) throws Exception"
+      result = @token.tokenize(line)
+      result[:name].should == "boot"
+      result[:column].should == "   public void ".size + 1
+      result[:more_info].should == line
+    end
 
     it "should ignore token '         return getDeploymentModelFactory().newEndpoint(targetBean);'" do
       line = '         return getDeploymentModelFactory().newEndpoint(targetBean);'

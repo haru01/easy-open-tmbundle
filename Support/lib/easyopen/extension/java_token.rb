@@ -17,7 +17,7 @@ module EasyOpen
               :column => pre.size + 1,
               :more_info => line }        
         # method        
-        elsif m = /(^.*\s)(\w*)\(.*\)[^;]$/.match(line)
+        elsif m = /(^.*\s)(\w*)\(.*\)[^;]*$/.match(line)
           pre = m[1]
           return { 
             :name => m[2],
