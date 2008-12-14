@@ -11,12 +11,12 @@ EasyOpen::OpenDef.new.run</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string>^@j</string>
+	<string>~@j</string>
 	<key>name</key>
 	<string>open_def</string>
 	<key>output</key>
 	<string>showAsTooltip</string>
 	<key>uuid</key>
-	<string>3CDBE47A-F55B-44A4-9C9B-19E72012292C</string>
+	<string>F79EF9CA-6D4D-45D9-807C-F7183BE855E6</string>
 </dict>
 </plist>

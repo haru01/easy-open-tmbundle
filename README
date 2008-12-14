@@ -8,7 +8,7 @@
 == Feature List
   * open method in project
   * code completion
-  * open recent file in project (control command h)
+  * open recent file in project
   * open gem 
 
 == Installation 
@@ -16,18 +16,18 @@
   git clone git://github.com/haru01/easy-open-tmbundle.git EasyOpen.tmbundle
 
 == Usage (open def)
-  0. run 'create_def_index_file' (command F12)
+  0. run 'create_def_index_file'
   1. move cursor to method name
-  2. run 'open_def' (control command j)
+  2. run 'open_def'
      => move cursor to def
-  3. run 'back_open_def' (control command k)
+  3. run 'back_open_def'
      => back cusor (1.) 
 
 == Usage(completion => open_def)
  1. type def name (part)
  2. type (esc) current cusor 
     => auto completion def name
- 3. run 'open_def' (control command j)
+ 3. run 'open_def'
 	  => move cursor to def
 
 == UnInstallation
@@ -36,4 +36,5 @@
 
   
 == TODO
+ * 
  * Support 'alias_method'
