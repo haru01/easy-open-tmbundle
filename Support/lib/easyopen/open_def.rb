@@ -10,7 +10,7 @@ module EasyOpen
       Config.setup(config)
       @current_location = { :file => ENV["TM_FILEPATH"], 
                             :line => ENV["TM_LINE_NUMBER"], 
-                            :column => ENV["TM_COLUMN_NUMBER"]}
+                            :column => ENV["TM_COLUMN_NUMBER"] }
     end
     
     def run
@@ -27,7 +27,7 @@ module EasyOpen
     end
     
     def menu_infos
-      def_index = DefDataRepository.load
+      def_index = DefIndexRepository.load
       locationids = def_index[:name_locationIds][Config[:current_word]]
       return [] unless locationids
       menu_infos = locationids.map do |id|

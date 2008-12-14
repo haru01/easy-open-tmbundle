@@ -20,7 +20,7 @@ module EasyOpen
         parser.parse(file_name)
       end
       FileUtils::mkdir_p("#{Config[:save_dir]}")
-      DefDataRepository.save parser.def_index      
+      DefIndexRepository.save parser.def_index      
       CallStackRepository.init
       puts "created def index file, and cleaned call stack file"
       puts "save_dir=>#{Config[:save_dir]}"

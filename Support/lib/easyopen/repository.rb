@@ -28,7 +28,7 @@ module EasyOpen
     end
   end
   
-  class DefDataRepository
+  class DefIndexRepository
     class << self
       def save(def_index)
         open("#{Config[:def_index_file]}", "w") { |mio|
