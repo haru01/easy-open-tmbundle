@@ -12,7 +12,7 @@ EasyOpen::CreateDefIndexFile.new.run
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string>~@c</string>
+	<string>^@c</string>
 	<key>name</key>
 	<string>create_def_index_file</string>
 	<key>output</key>

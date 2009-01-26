@@ -11,7 +11,7 @@ EasyOpen::OpenDef.new.run</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string>~@j</string>
+	<string>^@j</string>
 	<key>name</key>
 	<string>open_def</string>
 	<key>output</key>

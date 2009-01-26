@@ -3,11 +3,9 @@ module EasyOpen
     class RubyToken
       def tokenize(line)
         if m = /(^\s*(class|def|module)\s*)([\w:\.]*)(.*)$/.match(line)
-          if m[3].include?("self.")
-            name = m[3].gsub("self.", "")
-            pre_first_str = m[1] + "self."
-            
-            { :column => pre_first_str.size + 1,
+          if mm = m[3].match(/([^\.]+)\.([^\.]+)/) # static method
+            name = mm[2]
+            { :column => (m[1] + mm[1]).size + 2,
               :name => name,
               :more_info => line }
           else

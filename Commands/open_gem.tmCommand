@@ -19,7 +19,7 @@ end</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string>~@G</string>
+	<string>^@g</string>
 	<key>name</key>
 	<string>open_gem</string>
 	<key>output</key>

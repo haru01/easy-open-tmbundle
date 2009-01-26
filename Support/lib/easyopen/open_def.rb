@@ -20,7 +20,6 @@ module EasyOpen
     end
     
     def push_call_stack
-      call_stack = nil      
       call_stack = CallStackRepository.load
       call_stack.push @current_location
       CallStackRepository.save call_stack
@@ -30,7 +29,7 @@ module EasyOpen
       def_index = DefIndexRepository.load
       locationids = def_index[:name_locationIds][Config[:current_word]]
       return [] unless locationids
-      menu_infos = locationids.map do |id|
+      return locationids.map do |id|
         file_id = def_index[:locations][id][:file_id]
         filepath = def_index[:files][file_id]
         display = "#{filepath.gsub("#{Config[:project_dir]}/", '')}"+ 
@@ -43,7 +42,6 @@ module EasyOpen
           :display => display
         }
       end
-      menu_infos
     end
   end
 end

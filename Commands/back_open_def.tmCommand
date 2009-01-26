@@ -11,7 +11,7 @@ EasyOpen::BackOpenDef.new.run</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
-	<string>~@k</string>
+	<string>^@k</string>
 	<key>name</key>
 	<string>open_call_stack</string>
 	<key>output</key>

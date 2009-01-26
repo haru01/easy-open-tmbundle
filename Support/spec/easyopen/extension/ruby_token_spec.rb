@@ -6,6 +6,14 @@ module EasyOpen::Extension
       @token = RubyToken.new
     end
   
+    it "should tokenize '    def Parse.html_to_text s'" do
+      line = '    def Parse.html_to_text s'
+      result = @token.tokenize(line)
+      result[:name].should == "html_to_text"
+      result[:column].should == "    def Parse.".size + 1
+      result[:more_info].should == line      
+    end
+    
     it "should tokenize '	def self.hogefuga(hoge, foo)'" do
       line = '	def self.hogefuga(hoge, foo)'
       result = @token.tokenize(line)
