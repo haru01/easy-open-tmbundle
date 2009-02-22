@@ -17,4 +17,8 @@ bookmarks << bookmark
 File.open(bookmark_file, "w") {|out|
   YAML.dump(bookmarks, out)
 }
+unless bookmark
+  puts "bookmark is nil"
+  exit
+end
 go_to(bookmark)
