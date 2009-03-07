@@ -36,5 +36,4 @@
 
   
 == TODO
- * 
- * Support 'alias_method'
+ * remove bookmark if not found file-line

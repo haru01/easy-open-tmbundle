@@ -1,4 +1,6 @@
 require File.dirname(__FILE__) + '/config'
+require "yaml"
+
 
 module EasyOpen
   class CallStackRepository
@@ -47,6 +49,25 @@ module EasyOpen
           puts "not found def_index file. please create_def_index_file before open_def"
           exit
         end      
+      end
+    end
+  end
+
+  class BookmarkRepository
+    class << self
+      def save(bookmarks)
+        bookmark_file = EasyOpen::Config[:bookmark_file]
+        File.open(bookmark_file, "w") {|out|
+          YAML.dump(bookmarks, out)
+        }
+      end
+      
+      def load
+        bookmark_file = EasyOpen::Config[:bookmark_file]
+        bookmarks = File.open(bookmark_file) {|ym|
+          YAML.load(ym)
+        }
+        return bookmarks
       end
     end
   end

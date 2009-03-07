@@ -1,24 +1,26 @@
 require File.dirname(__FILE__) + '/ui'
 require File.dirname(__FILE__) + '/config'
-require "yaml"
+require File.dirname(__FILE__) + '/repository'
 
+file = ENV['TM_FILEPATH']
+line = ENV['TM_LINE_NUMBER']
 
-bookmark_file = EasyOpen::Config[:bookmark_file]
-unless File.exist?(bookmark_file)
-  puts "Not found bookmark.file => #{bookmark_file}"
-  exit
-end
-bookmarks = File.open(bookmark_file) {|ym|
-  YAML.load(ym)
-}
-include EasyOpen::UI
-bookmark=bookmarks.shift
+bookmarks = EasyOpen::BookmarkRepository.load
+
+bookmark = bookmarks.shift
 bookmarks << bookmark
-File.open(bookmark_file, "w") {|out|
-  YAML.dump(bookmarks, out)
-}
+if (file == bookmark[:file] and line == bookmark[:line]) 
+  bookmark = bookmarks.shift
+  bookmarks << bookmark
+end
+
+
+EasyOpen::BookmarkRepository.save bookmarks 
+
 unless bookmark
   puts "bookmark is nil"
   exit
 end
+
+include EasyOpen::UI
 go_to(bookmark)
