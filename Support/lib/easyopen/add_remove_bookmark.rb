@@ -5,11 +5,11 @@ require "pp"
 file = ENV['TM_FILEPATH']
 line = ENV['TM_LINE_NUMBER']
 
-begin
+
+bookmarks = []
+if File.exist?(EasyOpen::Config[:bookmark_file])
   bookmarks = EasyOpen::BookmarkRepository.load
-rescue
 end
-bookmarks ||= []
 bookmarks.compact!
 
 selected = bookmarks.select{ |node|

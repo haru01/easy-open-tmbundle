@@ -19,7 +19,6 @@ module EasyOpen
       Dir.glob("#{Config[:project_dir]}/**/*.{#{extnames}}").each do |file_name|
         parser.parse(file_name)
       end
-      FileUtils::mkdir_p("#{Config[:save_dir]}")
       DefIndexRepository.save parser.def_index      
       CallStackRepository.init
       puts "created def index file, and cleaned call stack file"

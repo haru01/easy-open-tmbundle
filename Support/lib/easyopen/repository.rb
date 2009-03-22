@@ -1,3 +1,4 @@
+require 'fileutils'
 require File.dirname(__FILE__) + '/config'
 require "yaml"
 
@@ -12,6 +13,7 @@ module EasyOpen
       end
       
       def save(call_stack)
+        FileUtils::mkdir_p("#{Config[:save_dir]}")
         open("#{Config[:call_stack_file]}", "w") { |mio|
           Marshal.dump(call_stack, mio)
         }
@@ -23,7 +25,7 @@ module EasyOpen
             Marshal.load(io)        
           }          
         rescue
-          puts "not found call_stack file. please create_def_index_file"
+          puts "not found call_stack file."
           exit
         end
       end
@@ -33,6 +35,7 @@ module EasyOpen
   class DefIndexRepository
     class << self
       def save(def_index)
+        FileUtils::mkdir_p("#{Config[:save_dir]}")
         open("#{Config[:def_index_file]}", "w") { |mio|
           Marshal.dump(def_index, mio)
         }
@@ -56,6 +59,7 @@ module EasyOpen
   class BookmarkRepository
     class << self
       def save(bookmarks)
+        FileUtils::mkdir_p("#{Config[:save_dir]}")
         bookmark_file = EasyOpen::Config[:bookmark_file]
         File.open(bookmark_file, "w") {|out|
           YAML.dump(bookmarks, out)
@@ -63,11 +67,16 @@ module EasyOpen
       end
       
       def load
-        bookmark_file = EasyOpen::Config[:bookmark_file]
-        bookmarks = File.open(bookmark_file) {|ym|
-          YAML.load(ym)
-        }
-        return bookmarks
+        begin
+          bookmark_file = EasyOpen::Config[:bookmark_file]
+          bookmarks = File.open(bookmark_file) {|ym|
+            YAML.load(ym)
+          }
+          return bookmarks
+        rescue
+          puts "not found bookmarks. please add bookmark"
+          exit
+        end
       end
     end
   end
