@@ -16,10 +16,10 @@ selected = bookmarks.select{ |node|
   node[:file] == file and node[:line] == line
 }
 if (selected.empty?)
-  bookmarks.insert(0, { :file=>file, :line=>line })
+  bookmarks.insert(0, {:file=>file, :line=>line})
   puts "add bookmark"
 else
-  bookmarks.delete_if {|node|
+  bookmarks.delete_if { |node|
     node[:file] == file and node[:line] == line
   }
   puts "remove bookmark"

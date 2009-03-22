@@ -7,6 +7,7 @@
 	<key>command</key>
 	<string>#!/usr/bin/env ruby
 require ENV['TM_BUNDLE_SUPPORT'] + "/lib/easyopen/next_bookmark"
+next_bookmark
 </string>
 	<key>input</key>
 	<string>none</string>
