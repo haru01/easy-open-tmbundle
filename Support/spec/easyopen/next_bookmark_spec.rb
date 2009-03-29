@@ -50,6 +50,21 @@ describe "rotate_bookmarks, when valid bookmarks" do
   end
 end
 
+describe "rotate_bookmarks, when not found line" do
+  before(:each) do
+    @bookmarks = 
+        [
+          {:file => File.dirname(__FILE__) + "/../../lib/easyopen/next_bookmark.rb", 
+          :line => "999999"}, # not found
+          ]
+  end
+  # Why: I want to remove invalid bookmark
+  it "should remove" do
+    expects = rotate_bookmarks(@bookmarks)
+    expects.should have(0).items
+  end
+end
+
 describe "rotate_bookmarks, when not found file" do
   before(:each) do
     @bookmarks = 

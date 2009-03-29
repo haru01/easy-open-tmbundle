@@ -6,10 +6,10 @@ def next_bookmark
   bookmarks = EasyOpen::BookmarkRepository.load
   exit_if_bookmarks_is_empty bookmarks
   bookmarks = rotate_bookmarks(bookmarks)
-  EasyOpen::BookmarkRepository.save bookmarks 
   exit_if_bookmarks_is_empty bookmarks
   include EasyOpen::UI
   go_to(bookmarks.last)
+  EasyOpen::BookmarkRepository.save bookmarks 
 end
 
 def exit_if_bookmarks_is_empty bookmarks
@@ -20,7 +20,6 @@ def exit_if_bookmarks_is_empty bookmarks
 end
 
 def rotate_bookmarks(bookmarks, file = ENV['TM_FILEPATH'], line = ENV['TM_LINE_NUMBER'])
-  # TODO case "found bookmark[:file], but not found bookmark[:line]"  
   while bookmarks.any?
     bookmark = bookmarks.shift
     if file == bookmark[:file] and line == bookmark[:line]
@@ -29,9 +28,12 @@ def rotate_bookmarks(bookmarks, file = ENV['TM_FILEPATH'], line = ENV['TM_LINE_N
     end
     if File.exist?(bookmark[:file])
       bookmarks << bookmark
-      break
+      if bookmarks.last[:line].to_i > open(bookmarks.last[:file]).read.count("\n") + 1
+        bookmarks.delete bookmarks.last
+      else
+        break
+      end
     end
   end
   return bookmarks
 end
-
