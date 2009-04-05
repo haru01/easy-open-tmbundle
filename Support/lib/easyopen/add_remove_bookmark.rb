@@ -5,16 +5,11 @@ require "pp"
 file = ENV['TM_FILEPATH']
 line = ENV['TM_LINE_NUMBER']
 
-
 bookmarks = []
-if File.exist?(EasyOpen::Config[:bookmark_file])
-  bookmarks = EasyOpen::BookmarkRepository.load
-end
-bookmarks.compact!
+bookmarks = EasyOpen::BookmarkRepository.load if File.exist?(EasyOpen::Config[:bookmark_file])
 
-selected = bookmarks.select{ |node|
-  node[:file] == file and node[:line] == line
-}
+selected = bookmarks.select{ |node| node[:file] == file and node[:line] == line }
+
 if (selected.empty?)
   bookmarks.insert(0, {:file=>file, :line=>line})
   puts "add bookmark"
@@ -24,4 +19,5 @@ else
   }
   puts "remove bookmark"
 end
+
 EasyOpen::BookmarkRepository.save bookmarks

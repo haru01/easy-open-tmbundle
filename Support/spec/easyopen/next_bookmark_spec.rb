@@ -17,7 +17,7 @@ describe "rotate_bookmarks, when one file" do
     expects[0][:line].should == "1"
   end
   
-  it "should select 1" do
+  it "should select 1, when dup file and line" do
     expects = rotate_bookmarks(@bookmarks, @dup_file, @dup_line)
     expects.should have(1).items
     expects[0][:line].should == "1"
