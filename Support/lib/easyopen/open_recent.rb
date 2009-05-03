@@ -24,6 +24,8 @@ module EasyOpen
         sort_by { |f| File.mtime(f) }.
         reverse[0..10].
         reject { |e| e == @current_file }.
+        reject { |e| !!e.match(/.*\.log$/) }.
+        reject { |e| !!e.match(/.*\.sqlite3$/) }.
         map { |e| 
           { 
             :file => e, 
