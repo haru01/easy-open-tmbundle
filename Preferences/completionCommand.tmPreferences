@@ -10,6 +10,14 @@
 	<dict>
 		<key>completionCommand</key>
 		<string>#!/usr/bin/env ruby
+require 'yaml'
+
+Dir.glob("#{ENV["TM_PROJECT_DIRECTORY"]}/spec/fixtures/*.yml").each { |file_name|
+  puts "*"
+  data = YAML.load_file(file_name)
+  puts data.values.map { |n| n.keys }.flatten.select { |e| e.include?(ENV["TM_CURRENT_WORD"].to_s) }
+}
+
 open("#{ENV["HOME"]}/.easyopen_tmbundle#{ENV["TM_PROJECT_DIRECTORY"]}/def_index.dump", "r") { |io|
 	def_index = Marshal.load(io)
 	puts def_index[:name_locationIds].keys.select { |e| e.include?(ENV["TM_CURRENT_WORD"].to_s) }
