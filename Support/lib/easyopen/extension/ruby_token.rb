@@ -2,10 +2,11 @@ module EasyOpen
   module Extension
     class RubyToken
       def tokenize(line)
+        # ruby
         if m = /(^\s*(class|def|module)\s*)([\w:\.]*)(.*)$/.match(line)
           if mm = m[3].match(/([^\.]+)\.([^\.]+)/) # static method
             name = mm[2]
-            { :column => (m[1] + mm[1]).size + 2,
+            return { :column => (m[1] + mm[1]).size + 2,
               :name => name,
               :more_info => line }
           else
@@ -13,7 +14,7 @@ module EasyOpen
             pre_first_str = m[1]
             colum = pre_first_str.size + 1
             
-            names.map do |name|
+            return names.map do |name|
               current = colum
               colum += name.size + "::".size
               { :name => name,
@@ -21,6 +22,13 @@ module EasyOpen
                 :more_info => line }
             end.last
           end
+        end
+        #rails
+        if m =/(^\s*(alias_attribute|belongs_to|has_many)[\s:]*)([\w]*)(.*)$/.match(line)
+          return {
+            :column => (m[1].size) + 1,
+            :name => m[3],
+            :more_info => line }
         end
       end
     end
