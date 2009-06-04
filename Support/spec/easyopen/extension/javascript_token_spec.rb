@@ -6,6 +6,14 @@ module EasyOpen::Extension
       @token = JavaScriptToken.new
     end
     
+    it "should tokinize '    color : function(string, color) {'" do
+      line =  '    color : function(string, color) {'
+      result = @token.tokenize(line)
+      result[:name].should == "color"
+      result[:column].should == "    ".size + 1
+      result[:more_info].should == line      
+    end
+    
     it "should tokenize '  be_empty: {'" do
       line =   '  be_empty: {'
       result = @token.tokenize(line)
