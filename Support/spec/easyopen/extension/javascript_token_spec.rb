@@ -45,7 +45,15 @@ module EasyOpen::Extension
       result[:column].should == " JSSpec.".size + 1
       result[:more_info].should == line
     end
-    
+
+    it "should tokeninze '  to = function(matcher) {'" do
+      line = '  to = function(matcher) {'
+      result = @token.tokenize(line)
+      result[:name].should == "to"
+      result[:column].should == "  ".size + 1
+      result[:more_info].should == line
+    end
+
     it "should tokeninze 'JSSpec.Executor = function (target, onSuccess, onException) {'" do
       result = @token.tokenize('JSSpec.Executor = function (target, onSuccess, onException) {')
       result[:name].should == "Executor"
