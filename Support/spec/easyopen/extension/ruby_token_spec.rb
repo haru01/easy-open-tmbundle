@@ -6,6 +6,14 @@ module EasyOpen::Extension
       @token = RubyToken.new
     end
     
+    it "should tokeinze '  HOGE2 = 2'" do
+      line = '  HOGE_2 = 1'
+      result = @token.tokenize(line)
+      result[:name].should == "HOGE_2"
+      result[:column].should == "  ".size + 1
+      result[:more_info].should == line
+    end
+    
     it "should tokeinze '  has_many :name'" do
       line = '  has_many :name'
       result = @token.tokenize(line)

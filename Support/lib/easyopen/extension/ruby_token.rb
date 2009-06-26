@@ -2,7 +2,7 @@ module EasyOpen
   module Extension
     class RubyToken
       def tokenize(line)
-        # ruby
+        # ruby class def module
         if m = /(^\s*(class|def|module)\s*)([\w:\.]*)(.*)$/.match(line)
           if mm = m[3].match(/([^\.]+)\.([^\.]+)/) # static method
             name = mm[2]
@@ -22,6 +22,11 @@ module EasyOpen
                 :more_info => line }
             end.last
           end
+        elsif m = /^(\s*)([_A-Z0-9]+)\s*=\s*.*$/.match(line)
+          return {
+            :column => (m[1].size) + 1,
+            :name => m[2],
+            :more_info => line }
         end
         #rails
         if m =/(^\s*(alias_attribute|belongs_to|has_many)[\s:]*)([\w]*)(.*)$/.match(line)
