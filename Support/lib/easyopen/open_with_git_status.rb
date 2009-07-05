@@ -16,22 +16,28 @@ module EasyOpen
       files = []
       untracked_files_lines = false
       git_status_str.split("\n").each do |line|
+        
         if line.include?('Untracked files:')
           untracked_files_lines = true
           next
         end
+        
         unless untracked_files_lines
           if m = /^#\s+renamed:.+\s->\s(.+)$/.match(line)
             files << { :file => "#{ENV['TM_PROJECT_DIRECTORY']}/#{m[1]}", 
                        :display => "renamed: #{m[1]}" }
+        
           elsif m = /^#\s+modified:\s+(.+)$/.match(line)
             files << { :file => "#{ENV['TM_PROJECT_DIRECTORY']}/#{m[1]}", 
                        :display => "modified: #{m[1]}" }
+        
           elsif m = /^#\s+new file:\s+(.+)$/.match(line)
             files << { :file => "#{ENV['TM_PROJECT_DIRECTORY']}/#{m[1]}", 
                       :display => "new file: #{m[1]}" }
           end
+          
         else
+          
           if m = /^#\s+([^()]+)$/.match(line)
             files << { :file  => "#{ENV['TM_PROJECT_DIRECTORY']}/#{m[1]}", 
                        :display => "untrancked: #{m[1]}" }
