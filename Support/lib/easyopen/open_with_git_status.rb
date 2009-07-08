@@ -9,7 +9,7 @@ module EasyOpen
     def open
       git_status_str = %x[pushd "#{ENV['TM_PROJECT_DIRECTORY']}";  git status]
       menu_infos = menu_infos git_status_str
-      open_menu menu_infos
+      open_menu menu_infos, true
     end
     
     def menu_infos git_status_str
