@@ -3,6 +3,10 @@ require "#{ENV['TM_SUPPORT_PATH']}/lib/textmate"
 
 module EasyOpen
   module UI
+    def open_menu_must_list_show infos
+      open_menu(infos, true)
+    end
+    
     def open_menu(infos, size_one_show = false)
       infos = [infos].flatten
       if infos.size == 0

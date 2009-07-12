@@ -9,7 +9,7 @@ module EasyOpen
     def open
       git_status_str = %x[pushd "#{ENV['TM_PROJECT_DIRECTORY']}";  git status]
       menu_infos = menu_infos git_status_str
-      open_menu menu_infos, true
+      open_menu_must_list_show menu_infos
     end
     
     def menu_infos git_status_str
@@ -26,18 +26,14 @@ module EasyOpen
           if m = /^#\s+renamed:.+\s->\s(.+)$/.match(line)
             files << { :file => "#{ENV['TM_PROJECT_DIRECTORY']}/#{m[1]}", 
                        :display => "renamed: #{m[1]}" }
-        
           elsif m = /^#\s+modified:\s+(.+)$/.match(line)
             files << { :file => "#{ENV['TM_PROJECT_DIRECTORY']}/#{m[1]}", 
                        :display => "modified: #{m[1]}" }
-        
           elsif m = /^#\s+new file:\s+(.+)$/.match(line)
             files << { :file => "#{ENV['TM_PROJECT_DIRECTORY']}/#{m[1]}", 
                       :display => "new file: #{m[1]}" }
           end
-          
         else
-          
           if m = /^#\s+([^()]+)$/.match(line)
             files << { :file  => "#{ENV['TM_PROJECT_DIRECTORY']}/#{m[1]}", 
                        :display => "untrancked: #{m[1]}" }
