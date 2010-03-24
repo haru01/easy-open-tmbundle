@@ -1,9 +1,9 @@
-require File.dirname(__FILE__) + "/../../../lib/easyopen/extension/javascript_token"
+require File.dirname(__FILE__) + "/../../../lib/easyopen/extension/js_token"
 
 module EasyOpen::Extension
-  describe JavaScriptToken do
+  describe JsToken do
     before(:each) do
-      @token = JavaScriptToken.new
+      @token = JsToken.new
     end
     
     it "should tokinize '    color : function(string, color) {'" do

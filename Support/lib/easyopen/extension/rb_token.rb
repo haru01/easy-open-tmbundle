@@ -1,6 +1,6 @@
 module EasyOpen
   module Extension
-    class RubyToken
+    class RbToken
       def tokenize(line)
         # ruby class def module
         if m = /(^\s*(class|def|module)\s*)([\w:\.]*)(.*)$/.match(line)

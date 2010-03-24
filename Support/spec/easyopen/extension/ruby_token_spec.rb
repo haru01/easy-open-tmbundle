@@ -1,9 +1,9 @@
-require File.dirname(__FILE__) + "/../../../lib/easyopen/extension/ruby_token"
+require File.dirname(__FILE__) + "/../../../lib/easyopen/extension/rb_token"
 
 module EasyOpen::Extension
-  describe RubyToken do
+  describe RbToken do
     before(:each) do
-      @token = RubyToken.new
+      @token = RbToken.new
     end
     
     it "should tokeinze '  HOGE2 = 2'" do

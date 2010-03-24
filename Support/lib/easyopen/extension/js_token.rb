@@ -1,6 +1,6 @@
 module EasyOpen
   module Extension
-    class JavaScriptToken
+    class JsToken
       def tokenize(line)
         if m = /^(\s*([^\s]*))\s*=\s*function\s*(\(.*\)).*\{.*$/.match(line)
           name = m[2].split(".").last

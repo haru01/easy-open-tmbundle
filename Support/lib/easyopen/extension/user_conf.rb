@@ -1,19 +1,19 @@
-require File.dirname(__FILE__) + "/ruby_token"
-require File.dirname(__FILE__) + "/javascript_token"
-require File.dirname(__FILE__) + "/java_token"
-require File.dirname(__FILE__) + "/coffee_token"
-
 
 module EasyOpen
   module Extension
     class UserConf
+      @@exts = {}
+      Dir.glob("#{File.dirname(__FILE__)}/*").each do |file_name|
+        require file_name
+        basename = File.basename(file_name)
+        unless basename == "user_conf.rb"
+          tmp = basename.sub("_token.rb", "") 
+          # puts tmp
+          @@exts[tmp] = eval("#{tmp[0..0].upcase}#{tmp[1..-1]}Token.new")
+        end
+      end
       def self.tokens
-        { 
-          "rb" => RubyToken.new,
-          "js" => JavaScriptToken.new,
-          "java" => JavaToken.new,
-          "coffee" => CoffeeToken.new
-        }
+        @@exts
       end
     end
   end
