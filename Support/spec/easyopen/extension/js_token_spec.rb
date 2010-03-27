@@ -29,6 +29,15 @@ module EasyOpen::Extension
       result[:column].should == "  function ".size + 1
       result[:more_info].should == line
     end
+
+    it "should tokenize 'function makeBlock (f) {'" do
+      line =  'function makeBlock (f) {'
+      result = @token.tokenize(line)
+      result[:name].should == "makeBlock"
+      result[:column].should == "function ".size + 1
+      result[:more_info].should == line
+    end
+    
     
     it "should tokeninze 'JSSpec.Executor = function(target, onSuccess, onException) {'" do
       line = 'JSSpec.Executor = function(target, onSuccess, onException) {'
@@ -67,5 +76,6 @@ module EasyOpen::Extension
       result[:column].should == "  ".size + 1
       result[:more_info].should == line
     end
+        
   end
 end

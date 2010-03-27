@@ -14,7 +14,7 @@ module EasyOpen
           { :name => m[2],
             :column => m[1].size + 1,
             :more_info => line }
-        elsif m = /^(\s*function\s*)(.*)\s*\(.*$/.match(line)
+        elsif m = /^(\s*function\s*)([^\s]*)\s*\(.*$/.match(line)
           
           { :name => m[2],
             :column => m[1].size + 1,
