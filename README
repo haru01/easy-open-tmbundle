@@ -34,6 +34,3 @@
   rm -rf ~/Library/Application\ Support/TextMate/Bundles/EasyOpen.tmbundle
   rm -rf ~/.easyopen_tmbundle
 
-  
-== TODO
- * open with git status
