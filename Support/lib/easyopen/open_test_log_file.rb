@@ -22,7 +22,7 @@ def sub_link(line)
   line = line.gsub(/^\s/, "&nbsp;")
 end
 
-def a_herf(url, line, display)
+def a_herf(url, line = 1, display)
   %Q+<Font Size="4" Color="#0000ff"><a href="txmt://open?url=file://#{url}&line=#{line}">#{display}</a></Font>+
 end
 
