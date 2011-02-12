@@ -35,6 +35,13 @@ module EasyOpen
             :name => m[3],
             :more_info => line }
         end
+        # rspec 'let(:parent_group_metadata)'
+        if m =/(^\s*let\(:)(\w*)\).*$/.match(line)
+          return {
+            :column => (m[1].size) + 1,
+            :name => m[2],
+            :more_info => line }
+        end        
       end
     end
   end
