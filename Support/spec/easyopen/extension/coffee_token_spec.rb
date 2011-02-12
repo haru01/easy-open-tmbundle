@@ -1,41 +1,44 @@
 require File.dirname(__FILE__) + "/../../../lib/easyopen/extension/coffee_token"
+require File.dirname(__FILE__) + "/spec_helper"
 
 module EasyOpen::Extension
-  describe CoffeeToken do
-    before(:each) do
-      @coffee = CoffeeToken.new
+  describe "CoffeeToken#tokenize" do
+    
+    def sbjct line
+      CoffeeToken.new.tokenize(line)
     end
 
-    it "should token 'hoge: 8" do
+    it "token 'hoge: 8" do
       line = "hoge: 8"
-      result = @coffee.tokenize(line)
-      result[:name].should == "hoge"
-      result[:column].should == "".size + 1
-      result[:more_info].should == line
+      sbjct(line).should eq_token({
+                :name  => "hoge", 
+                :column => 1, 
+                :more_info => line})
+      
     end
     
-    it "should token 'award_medals: (first, second, rest...) ->'" do
+    it "token 'award_medals: (first, second, rest...) ->'" do
       line = "award_medals: (first, second, rest...) ->"
-      result = @coffee.tokenize(line)
-      result[:name].should == "award_medals"
-      result[:column].should == "".size + 1
-      result[:more_info].should == line
+      sbjct(line).should eq_token({
+                :name  => "award_medals", 
+                :column => 1, 
+                :more_info => line})
     end
 
-    it "should token '  award_medals: (first, second, rest...) ->'" do
+    it "token '  award_medals: (first, second, rest...) ->'" do
       line = "  award_medals: (first, second, rest...) ->"
-      result = @coffee.tokenize(line)
-      result[:name].should == "award_medals"
-      result[:column].should == "  ".size + 1
-      result[:more_info].should == line
+      sbjct(line).should eq_token({
+                :name  => "award_medals", 
+                :column => "  ".size + 1, 
+                :more_info => line})
     end
     
-    it "should token 'class Horse extends Animal'" do
+    it "token 'class Horse extends Animal'" do
       line = "class Horse extends Animal"
-      result = @coffee.tokenize(line)
-      result[:name].should == "Horse"
-      result[:column].should == "class ".size + 1
-      result[:more_info].should == line
+      sbjct(line).should eq_token({
+                :name  => "Horse", 
+                :column => "class ".size + 1, 
+                :more_info => line})
     end
   end
 end
