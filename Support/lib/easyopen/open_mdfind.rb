@@ -8,7 +8,7 @@ end
 
 TextMate::UI.request_string do |keyword|
   paths = `mdfind #{keyword}`
-  paths.each do|path|
+  paths.split("\n").each do|path|
     puts a_herf(path)
   end
 end
