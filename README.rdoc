@@ -53,4 +53,4 @@ see also http://rvm.beginrescueend.com/integration/textmate/
   rm -rf ~/Library/Application\ Support/TextMate/Bundles/EasyOpen.tmbundle
   rm -rf ~/.easyopen_tmbundle
 
-Copyright (c) 2011 Ienaga Eiji
+Copyright (c) 2011 Eiji Ienaga, released under the MIT license
