@@ -12,7 +12,8 @@ selected = bookmarks.select{ |node| node[:file] == file and node[:line] == line 
 
 if (selected.empty?)
   bookmarks.insert(0, {:file=>file, :line=>line})
-  puts "add bookmark"
+  puts "add bookmark[#{File.basename(file)}:#{line}]"
+  puts "if press again then remve bookmark"
 else
   bookmarks.delete_if { |node|
     node[:file] == file and node[:line] == line
