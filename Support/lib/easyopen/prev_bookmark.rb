@@ -5,7 +5,7 @@ require File.dirname(__FILE__) + '/repository'
 file = ENV['TM_FILEPATH']
 line = ENV['TM_LINE_NUMBER']
 
-bookmarks = bookmarks = EasyOpen::BookmarkRepository.load
+bookmarks = EasyOpen::BookmarkRepository.load
 
 bookmark = bookmarks.pop
 bookmarks.insert(0, bookmark)
