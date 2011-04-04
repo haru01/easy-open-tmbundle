@@ -42,6 +42,8 @@ module EasyOpen
             puts "not support extname=>#{File.extname(file_name)}"
             return
           end
+
+          line = convert_exp_able(line)
           if t = token.tokenize(line)
               @files << file_name unless @files.include?(file_name)
               @name_locationIds[t[:name]] ||= []
@@ -57,7 +59,16 @@ module EasyOpen
         end
       end
     end
-
+    
+    def convert_exp_able(line)
+      begin
+        /^/.match(line)
+      rescue Exception => e
+        return line.encode("UTF-16BE", :invalid => :replace, :undef => :replace, :replace => '?').encode("UTF-8")             
+      end
+      line
+    end
+    
     def def_index
       {
         :name_locationIds => @name_locationIds, 

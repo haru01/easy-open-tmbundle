@@ -1,3 +1,5 @@
+# coding: utf-8
+
 require "pp"
 
 require File.dirname(__FILE__) + "/../../lib/easyopen/create_def_index_file"
@@ -27,6 +29,10 @@ module EasyOpen
     it "ハッシュ:name_locationIdsに名前をキーに複数のlocationsのインデックス情報が含まれていること" do
       @result[:name_locationIds]["hoge"].should_not eql(nil)
       @result[:name_locationIds]["hoge"].size.should eql(3)
+    end
+    
+    it "不正文字列は置換して、正規表現が使えるようにすること" do
+      lambda { /^/.match(@parser.convert_exp_able("abc\x81あいう\u{20bb7}\xe3")) }.should_not raise_error
     end
   end
 end
