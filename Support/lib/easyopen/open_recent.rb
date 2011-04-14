@@ -21,11 +21,13 @@ module EasyOpen
 
     def recent_infos
       Dir.glob("#{@project_dir}/**/*.*").
-        sort_by { |f| File.mtime(f) }.
-        reverse[0..10].
         reject { |e| e == @current_file }.
         reject { |e| !!e.match(/.*\.log$/) }.
-        reject { |e| !!e.match(/.*\.sqlite3$/) }.
+        reject { |e| !!e.match(/.*coverage.*$/) }.
+        reject { |e| !!e.match(/.*coverage.*$/) }.
+        reject { |e| !!e.match(/.*tmp\/.*$/) }.
+        sort_by { |f| File.mtime(f) }.
+        reverse[0..10].
         map { |e| 
           { 
             :file => e, 
