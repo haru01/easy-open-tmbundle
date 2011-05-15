@@ -2,7 +2,7 @@ module EasyOpen
   module Extension
     class RbToken
       def tokenize(line)
-        # ruby class def module
+        # class def module
         if m = /(^\s*(class|def|module)\s*)([\w:\.]*)(.*)$/.match(line)
           if mm = m[3].match(/([^\.]+)\.([^\.]+)/) # static method
             name = mm[2]
@@ -13,7 +13,7 @@ module EasyOpen
             names = m[3].split("::")
             pre_first_str = m[1]
             colum = pre_first_str.size + 1
-            
+
             return names.map do |name|
               current = colum
               colum += name.size + "::".size
@@ -28,8 +28,9 @@ module EasyOpen
             :name => m[2],
             :more_info => line }
         end
-        #rails
-        if m =/(^\s*(alias_attribute|belongs_to|has_many)[\s:]*)([\w]*)(.*)$/.match(line)
+
+        # alias_method, aliase_attribute, belongs_to, has_many
+        if m =/(^\s*(alias_method|alias_attribute|belongs_to|has_many)[\s:]*)([\w]*)(.*)$/.match(line)
           return {
             :column => (m[1].size) + 1,
             :name => m[3],
@@ -41,7 +42,7 @@ module EasyOpen
             :column => (m[1].size) + 1,
             :name => m[2],
             :more_info => line }
-        end        
+        end
       end
     end
   end
