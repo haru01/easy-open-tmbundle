@@ -5,7 +5,7 @@ require File.dirname(__FILE__) + '/config'
 module EasyOpen
   class OpenRecent
     include EasyOpen::UI
-    
+
     def initialize
       @project_dir = Config[:project_dir]
       @current_file = Config[:current_file]
@@ -24,13 +24,12 @@ module EasyOpen
         reject { |e| e == @current_file }.
         reject { |e| !!e.match(/.*\.log$/) }.
         reject { |e| !!e.match(/.*coverage.*$/) }.
-        reject { |e| !!e.match(/.*coverage.*$/) }.
         reject { |e| !!e.match(/.*tmp\/.*$/) }.
         sort_by { |f| File.mtime(f) }.
         reverse[0..10].
-        map { |e| 
-          { 
-            :file => e, 
+        map { |e|
+          {
+            :file => e,
             :display => "#{e.sub(@project_dir, "").sub("/", "")}"
           }
         }
