@@ -11,19 +11,19 @@ module EasyOpen
           Marshal.dump([], mio)
         }
       end
-      
+
       def save(call_stack)
         FileUtils::mkdir_p("#{Config[:save_dir]}")
         open("#{Config[:call_stack_file]}", "w") { |mio|
           Marshal.dump(call_stack, mio)
         }
       end
-      
+
       def load
         begin
           open("#{Config[:call_stack_file]}", "r") { |io|
-            Marshal.load(io)        
-          }          
+            Marshal.load(io)
+          }
         rescue
           puts "not found call_stack file."
           exit
@@ -31,7 +31,7 @@ module EasyOpen
       end
     end
   end
-  
+
   class DefIndexRepository
     class << self
       def save(def_index)
@@ -40,7 +40,7 @@ module EasyOpen
           Marshal.dump(def_index, mio)
         }
       end
-      
+
       def load
         begin
           def_index = nil
@@ -51,7 +51,7 @@ module EasyOpen
         rescue
           puts "not found def_index file. please create_def_index_file before open_def"
           exit
-        end      
+        end
       end
     end
   end
@@ -65,7 +65,7 @@ module EasyOpen
           YAML.dump(bookmarks, out)
         }
       end
-      
+
       def load
         begin
           bookmark_file = EasyOpen::Config[:bookmark_file]
