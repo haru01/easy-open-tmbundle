@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + '/ui'
-require File.dirname(__FILE__) + '/config'
+require File.dirname(__FILE__) + '/context'
 require File.dirname(__FILE__) + '/repository'
 
 file = ENV['TM_FILEPATH']

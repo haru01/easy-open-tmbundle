@@ -1,5 +1,5 @@
 require 'fileutils'
-require File.dirname(__FILE__) + '/config'
+require File.dirname(__FILE__) + '/context'
 require "yaml"
 
 
@@ -7,21 +7,21 @@ module EasyOpen
   class CallStackRepository
     class << self
       def init
-        open("#{Config[:call_stack_file]}", "w") { |mio|
+        open("#{Context[:call_stack_file]}", "w") { |mio|
           Marshal.dump([], mio)
         }
       end
 
       def save(call_stack)
-        FileUtils::mkdir_p("#{Config[:save_dir]}")
-        open("#{Config[:call_stack_file]}", "w") { |mio|
+        FileUtils::mkdir_p("#{Context[:save_dir]}")
+        open("#{Context[:call_stack_file]}", "w") { |mio|
           Marshal.dump(call_stack, mio)
         }
       end
 
       def load
         begin
-          open("#{Config[:call_stack_file]}", "r") { |io|
+          open("#{Context[:call_stack_file]}", "r") { |io|
             Marshal.load(io)
           }
         rescue
@@ -35,8 +35,8 @@ module EasyOpen
   class DefIndexRepository
     class << self
       def save(def_index)
-        FileUtils::mkdir_p("#{Config[:save_dir]}")
-        open("#{Config[:def_index_file]}", "w") { |mio|
+        FileUtils::mkdir_p("#{Context[:save_dir]}")
+        open("#{Context[:def_index_file]}", "w") { |mio|
           Marshal.dump(def_index, mio)
         }
       end
@@ -44,7 +44,7 @@ module EasyOpen
       def load
         begin
           def_index = nil
-          open("#{Config[:def_index_file]}", "r") { |io|
+          open("#{Context[:def_index_file]}", "r") { |io|
             def_index = Marshal.load(io)
           }
           return def_index
@@ -59,8 +59,8 @@ module EasyOpen
   class BookmarkRepository
     class << self
       def save(bookmarks)
-        FileUtils::mkdir_p("#{Config[:save_dir]}")
-        bookmark_file = EasyOpen::Config[:bookmark_file]
+        FileUtils::mkdir_p("#{Context[:save_dir]}")
+        bookmark_file = EasyOpen::Context[:bookmark_file]
         File.open(bookmark_file, "w") {|out|
           YAML.dump(bookmarks, out)
         }
@@ -68,7 +68,7 @@ module EasyOpen
 
       def load
         begin
-          bookmark_file = EasyOpen::Config[:bookmark_file]
+          bookmark_file = EasyOpen::Context[:bookmark_file]
           bookmarks = File.open(bookmark_file) {|ym|
             YAML.load(ym)
           }

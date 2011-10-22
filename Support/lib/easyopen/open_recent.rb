@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + '/ui'
-require File.dirname(__FILE__) + '/config'
+require File.dirname(__FILE__) + '/context'
 
 
 module EasyOpen
@@ -7,8 +7,8 @@ module EasyOpen
     include EasyOpen::UI
 
     def initialize
-      @project_dir = Config[:project_dir]
-      @current_file = Config[:current_file]
+      @project_dir = Context[:project_dir]
+      @current_file = Context[:current_file]
     end
 
     def run

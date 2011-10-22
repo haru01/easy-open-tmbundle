@@ -56,8 +56,8 @@ module EasyOpen::Extension
                     :more_info => line})
     end
   
-    it "tokenize '  grep: function(filter, iterator, context) {'" do
-      line = '  grep: function(filter, iterator, context) {'
+    it "tokenize '  grep: function(filter, iterator, ccontext) {'" do
+      line = '  grep: function(filter, iterator, ccontext) {'
       sbjct(line).should 
           eq_token({:name  => "grep", 
                     :column => "  ".size + 1,

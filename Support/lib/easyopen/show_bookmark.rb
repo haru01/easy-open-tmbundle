@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/config'
+require File.dirname(__FILE__) + '/context'
 require File.dirname(__FILE__) + '/repository'
 require File.dirname(__FILE__) + '/ui'
 
@@ -7,7 +7,7 @@ require File.dirname(__FILE__) + '/ui'
 file = ENV['TM_FILEPATH']
 line = ENV['TM_LINE_NUMBER']
 
-unless File.exist?(EasyOpen::Config[:bookmark_file])
+unless File.exist?(EasyOpen::Context[:bookmark_file])
   puts "not found bookmark file"
   exit
 end

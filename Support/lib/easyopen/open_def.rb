@@ -1,13 +1,13 @@
 require File.dirname(__FILE__) + '/ui'
-require File.dirname(__FILE__) + '/config'
+require File.dirname(__FILE__) + '/context'
 require File.dirname(__FILE__) + '/repository'
 
 module EasyOpen
   class OpenDef
     include EasyOpen::UI
     
-    def initialize(config = {})
-      Config.setup(config)
+    def initialize(context = {})
+      Context.setup(context)
       @current_location = { :file => ENV["TM_FILEPATH"], 
                             :line => ENV["TM_LINE_NUMBER"], 
                             :column => ENV["TM_COLUMN_NUMBER"] }
@@ -27,12 +27,12 @@ module EasyOpen
     
     def menu_infos
       def_index = DefIndexRepository.load
-      locationids = def_index[:name_locationIds][Config[:current_word]]
+      locationids = def_index[:name_locationIds][Context[:current_word]]
       return [] unless locationids
       return locationids.map do |id|
         file_id = def_index[:locations][id][:file_id]
         filepath = def_index[:files][file_id]
-        display = "#{filepath.gsub("#{Config[:project_dir]}/", '')}"+ 
+        display = "#{filepath.gsub("#{Context[:project_dir]}/", '')}"+ 
                   ":#{def_index[:locations][id][:line]}" +
                   ": #{def_index[:locations][id][:more_info]}"
         {  

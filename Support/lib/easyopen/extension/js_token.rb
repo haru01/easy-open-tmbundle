@@ -18,7 +18,7 @@ module EasyOpen
             :column => m[1].size + 1,
             :more_info => line }
 
-        # ex: ' grep: function(filter, iterator, context) {'
+        # ex: ' grep: function(filter, iterator, ccontext) {'
         elsif m = /^([\s]*)(\S*)\s*:\s*function.*$/.match(line)
         
           { :name => m[2],

@@ -1,28 +1,28 @@
 require 'fileutils'
-require File.dirname(__FILE__) + '/config'
+require File.dirname(__FILE__) + '/context'
 require File.dirname(__FILE__) + '/repository'
 require File.dirname(__FILE__) + '/extension/user_conf'
 
 module EasyOpen
   class CreateDefIndexFile
-    def initialize(config = {})
-      Config.setup(config)
+    def initialize(context = {})
+      Context.setup(context)
     end
     
     def run
-      if Config[:project_dir].nil?
+      if Context[:project_dir].nil?
         puts "TM_PROJECT_DIRECTORY is nil. can't create def_index_file"
         exit
       end
       parser = Parser.new
       extnames = EasyOpen::Extension::UserConf.tokens.keys.join(",")
-      Dir.glob("#{Config[:project_dir]}/**/*.{#{extnames}}").each do |file_name|
+      Dir.glob("#{Context[:project_dir]}/**/*.{#{extnames}}").each do |file_name|
         parser.parse(file_name)
       end
       DefIndexRepository.save parser.def_index      
       CallStackRepository.init
       puts "created def index file, and cleaned call stack file"
-      puts "save_dir=>#{Config[:save_dir]}"
+      puts "save_dir=>#{Context[:save_dir]}"
     end
   end
   

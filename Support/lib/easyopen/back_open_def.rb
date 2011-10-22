@@ -4,8 +4,8 @@ require File.dirname(__FILE__) + '/repository'
 module EasyOpen
   class BackOpenDef
     include EasyOpen::UI
-    def initialize(config = {})
-      Config.setup(config)
+    def initialize(context = {})
+      Context.setup(context)
     end
     
     def run

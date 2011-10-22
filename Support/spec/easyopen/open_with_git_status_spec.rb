@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + "/../../lib/easyopen/config"
+require File.dirname(__FILE__) + "/../../lib/easyopen/context"
 require File.dirname(__FILE__) + "/../../lib/easyopen/ui"
 require File.dirname(__FILE__) + "/../../lib/easyopen/open_with_git_status"
 
