@@ -4,7 +4,7 @@ require File.dirname(__FILE__) + "/spec_helper"
 module EasyOpen::Extension
   describe "RbToken#tokeninze" do
 
-def sbjct input_line
+    def sbjct input_line
       RbToken.new.tokenize(input_line)
     end
 

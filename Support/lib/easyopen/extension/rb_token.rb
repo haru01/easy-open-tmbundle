@@ -22,15 +22,15 @@ module EasyOpen
                 :more_info => line }
             end.last
           end
-        elsif m = /^(\s*)([_A-Z0-9]+)\s*=\s*.*$/.match(line)
+        end
+        if m = /^(\s*)([_A-Z0-9]+)\s*=\s*.*$/.match(line)
           return {
             :column => (m[1].size) + 1,
             :name => m[2],
             :more_info => line }
         end
-
-        # alias_method, aliase_attribute, belongs_to, has_many
-        if m =/(^\s*(alias_method|alias_attribute|belongs_to|has_many)[\s:]*)([\w]*)(.*)$/.match(line)
+        # alias_method, aliase_attribute, belongs_to, has_many, attr_reader, attr_accessor
+        if m =/(^\s*(alias_method|alias_attribute|belongs_to|has_many|attr_reader|attr_accessor|alias)[\s:]*)([\w]*)(.*)$/.match(line)
           return {
             :column => (m[1].size) + 1,
             :name => m[3],
